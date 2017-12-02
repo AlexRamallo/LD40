@@ -5,9 +5,11 @@ package;
  * @author Alejandro Ramallo
  */
 import flixel.FlxG;
+import source.PopupConfirm;
 class PCProgram {
 	
 	public var data:PlayData;
+	public var popup:PopupConfirm;
 	public var home:LaptopScreen;
 	public var screens:Array<LaptopScreen>;
 	public var active:LaptopScreen;
@@ -20,6 +22,9 @@ class PCProgram {
 		screens = [];
 		home = new HomeScreen(this);
 		data = new PlayData();
+		popup = new PopupConfirm("", "", null);
+		popup.init();
+		FlxG.state.add(popup);
 	}
 	
 	public function boot(){

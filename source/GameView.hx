@@ -13,17 +13,17 @@ class GameView
 	public var pc:FlxSprite;
 	public var atPC:Bool = false;
 	public var anchor_pc = {
-		x: 	371,
-		y: 246
+		x: 	379,
+		y: 198
 	};
 	public var anchor_scr = {
-		x: 466,
-		y: 317
+		x: 493,
+		y: 287
 	};
 	
 	public function new() {
 		bg = new FlxSprite(0, 0);		
-		bg.loadGraphic(AssetPaths.bg1__png, false, 1600, 1200);
+		bg.loadGraphic(AssetPaths.desk__png, false, 1600, 1200);
 	}
 	
 	public function showRoom(){

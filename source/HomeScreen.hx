@@ -18,7 +18,9 @@ class HomeScreen extends BaseScreen{
 	}
 	
 	private function initHome(){
-		btnNewStunt = new FlxButton();
+		btnNewStunt = new FlxButton(0,0,"",function(){
+			prog.popup.show(new FlxPoint(banner.x + 100, banner.y + 100));
+		});
 		btnPastStunts = new FlxButton();
 		btnAdNetworks = new FlxButton();
 		
