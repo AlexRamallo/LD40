@@ -6,7 +6,8 @@ package;
  */
 class Stunt_Subject 
 {
-	public var name:String;
+	public var name(get, set):String;
+	private var _name:String;
 	
 	public var delta_risk:Float;
 	public var delta_danger:Int;
@@ -20,6 +21,15 @@ class Stunt_Subject
 		delta_danger = d;
 		delta_stupidity = s;
 		price = p;
+	}
+	
+	public function get_name():String{
+		return _name.toUpperCase();
+	}
+	
+	public function set_name(s:String):String{
+		_name = s;
+		return _name;
 	}
 	
 }

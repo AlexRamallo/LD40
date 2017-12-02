@@ -7,13 +7,17 @@ package;
 import flixel.FlxG;
 import flixel.math.FlxPoint;
 import PopupConfirm;
+import haxe.ds.StringMap;
 class PCProgram {
+	
+	public var shared:StringMap<Dynamic>;	
 	
 	public var data:PlayData;
 	public var popup:PopupConfirm;
 	public var home:LaptopScreen;
 	public var screens:Array<LaptopScreen>;
 	public var active:LaptopScreen;
+
 	public var anchor = {
 		x: 0,
 		y: 0
@@ -21,6 +25,7 @@ class PCProgram {
 
 	public function new() {
 		screens = [];
+		shared = new StringMap<Dynamic>();
 		home = new HomeScreen(this);
 		data = new PlayData();
 		popup = new PopupConfirm("", "", null);

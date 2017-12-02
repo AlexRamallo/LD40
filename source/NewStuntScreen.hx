@@ -29,6 +29,14 @@ import flixel.group.FlxGroup;
 		 root = rt;
 	 }
 	 
+	 public function setPair(act:Stunt_Act, sub:Stunt_Subject){
+		pair = {
+			act: act,
+			sub: sub
+		};
+		updateUI();
+	 }
+	 
 	 public function init(){
 		btnEdit = new FlxButton(0, 0, "", onEdit);
 		txLabel = new FlxText(0, 0, 300);
@@ -70,6 +78,7 @@ import flixel.group.FlxGroup;
 				});
 		 }else{
 			 //Launch act selection dialog
+			 prog.shared.set('formsel_targ', {idx: offset});
 			 prog.openScreen(new FormScreen_SelectAct(prog));
 		 }
 	 }
@@ -142,6 +151,31 @@ class NewStuntScreen extends BaseScreen{
 	override public function onOpen():Void {
 		super.onOpen();
 		initUI();
+		
+		var formsel_targ:{idx:Int} = prog.shared.get("formsel_targ");
+		var formsel_Act:Stunt_Act = prog.shared.get("formsel_Act");
+		var formsel_Sub:Stunt_Subject = prog.shared.get("formsel_Subject");
+		
+		if(formsel_Act!=null && formsel_Sub!=null && formsel_targ!=null){
+			prog.shared.set('staged_act_${formsel_targ.idx}', formsel_Act);
+			prog.shared.set('staged_subject_${formsel_targ.idx}', formsel_Sub);
+			
+			prog.shared.set('formsel_targ', null);
+			prog.shared.set('formsel_Act', null);
+			prog.shared.set('formsel_Subject', null);
+		}
+		
+		loadStagedStunts();
+	}
+	
+	private function loadStagedStunts(){
+		for(i in 0...actWidgets.length){
+			var sAct:Stunt_Act = prog.shared.get('staged_act_$i');
+			var sSub:Stunt_Subject = prog.shared.get('staged_subject_$i');
+
+			if(sAct!=null && sSub!=null)
+				actWidgets[i].setPair(sAct, sSub);
+		}
 	}
 	
 	override public function onClose():Void {

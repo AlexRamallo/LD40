@@ -10,7 +10,7 @@ import flixel.group.FlxGroup;
  * @author Alejandro Ramallo
  */
  
-class FormScreen_SelectAct extends BaseScreen{
+class FormScreen_SelectSubject extends BaseScreen{
 	
 	public var txTitle:FlxText;
 	public var txInstruct:FlxText;
@@ -24,6 +24,8 @@ class FormScreen_SelectAct extends BaseScreen{
 	var options:Array<FlxButton> = [];
 	var rowSize:Int = 5;
 	
+	var selectedAct:Stunt_Act = null;
+	
 	public function new(p) 
 	{
 		super(p);
@@ -35,11 +37,11 @@ class FormScreen_SelectAct extends BaseScreen{
 		txTitle = new FlxText();
 		txInstruct = new FlxText();
 		
-		txTitle.text = "Select Act Type";
+		txTitle.text = "Select Subject for \""+selectedAct.name+"\"";
 		txTitle.size = 16;
 		txTitle.color = 0xFF4800;
 		
-		txInstruct.text = "choose the type of act you wish to perform";
+		txInstruct.text = "choose the subject that you wish to perform the act on";
 		txInstruct.size = 12;
 		txInstruct.color = 0xFF4800;
 		
@@ -51,9 +53,9 @@ class FormScreen_SelectAct extends BaseScreen{
 		
 		var root = new FlxPoint(0, 0);
 		
-		var acts = prog.data.getAllActs();
+		var subjects = selectedAct.subjects;
 		options = [];
-		for(i in 0...acts.length){
+		for(i in 0...subjects.length){
 			var btn = new FlxButton(0,0,"",function(){
 				onSelect(i);
 			});
@@ -91,18 +93,20 @@ class FormScreen_SelectAct extends BaseScreen{
 	
 	public function onSelect(idx:Int){
 		//Handle selection
-		var acts = prog.data.getAllActs();
-		var sel = acts[idx];
-		prog.shared.set("formsel_Act", sel);
+		var subjects = selectedAct.subjects;
+		var sel = subjects[idx];
+		prog.shared.set("formsel_Subject", sel);
 		
-		statsTxt[0].text = "Risk:\n\n" + Math.round(sel.risk) + "%";
-		statsTxt[1].text = "Danger:\n\n" + sel.danger;
-		statsTxt[2].text = "Stupidity:\n\n" + sel.stupidity + "/10";
+		statsTxt[0].text = "Risk:\n\n" + Math.round(sel.delta_risk) + "%";
+		statsTxt[1].text = "Danger:\n\n" + sel.delta_danger;
+		statsTxt[2].text = "Stupidity:\n\n" + sel.delta_stupidity + "/10";
 	}
 	
 	override public function setPos(x:Int, y:Int) {
 		super.setPos(x, y);
+		
 		if (txTitle == null) return;
+		
 		txTitle.x = banner.x + 30;
 		txTitle.y = banner.y + 110;
 		
@@ -126,32 +130,50 @@ class FormScreen_SelectAct extends BaseScreen{
 		btnNext.y = statsBg.y + 35;
 		
 		
-		var acts = prog.data.getAllActs();
+		var subjects = selectedAct.subjects;
 		var root = new FlxPoint(txInstruct.x, txInstruct.y + 30);
 		var hsep = 100;
 		var vsep = 50;
 		for(i in 0...options.length){
-			var act:Stunt_Act = acts[i];
+			var sub:Stunt_Subject = subjects[i];
 			
 			var rx = i % rowSize;
 			var ry = Math.floor(i / rowSize);
 			
-			options[i].text = act.name;
+			options[i].text = sub.name;
 			options[i].x = root.x + (rx * hsep);
 			options[i].y = root.y + (ry * vsep);
 		}
 	}
 	
 	public function onClickNext(){
-		prog.openScreen(new FormScreen_SelectSubject(prog));
+		var sel:Stunt_Subject = cast prog.shared.get("formsel_Subject");
+		if(sel == null){
+			prog.alert("You must select a subject before continuing.");
+			return;
+		}else{
+			var str = selectedAct.name + " " + sel.name;
+			prog.confirm("Are you sure?", 'You\'ve chosen the stunt:\n\n$str',
+			function(){
+				prog.openScreen(new NewStuntScreen(prog));
+			});
+		}
 	}
 	
 	public function onClickBack(){
-		prog.goBack();
+		//--
 	}
 	
 	override public function onOpen():Void {
 		super.onOpen();
+		
+		selectedAct = prog.shared.get("formsel_Act");
+		if(selectedAct == null){
+			prog.alert("ERROR: no act was selected.");
+			prog.goHome();
+			return;
+		}
+		
 		initUI();
 	}
 	
@@ -169,7 +191,7 @@ class FormScreen_SelectAct extends BaseScreen{
 		remove(btnBack);
 		
 		for(o in options)
-			remove(o);		
+			remove(o);
 	}
 	
 	override public function onStep(elapsed:Float):Void {
