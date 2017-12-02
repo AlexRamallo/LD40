@@ -89,6 +89,6 @@ class BaseScreen extends LaptopScreen
 		FlxDestroyUtil.destroy(banner_money);
 	}
 	override public function onStep(elapsed:Float):Void{
-		
+		updateBase();
 	}
 }

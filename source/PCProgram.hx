@@ -5,6 +5,7 @@ package;
  * @author Alejandro Ramallo
  */
 import flixel.FlxG;
+import flixel.math.FlxPoint;
 import PopupConfirm;
 class PCProgram {
 	
@@ -60,4 +61,28 @@ class PCProgram {
 			active.onStep(elapsed);
 	}
 	
+	public function confirm(title, msg, onconfirm:Void->Void, ?oncancel:Void->Void){
+			popup.title = title;
+			popup.message = msg;
+			popup.questions = {
+				label1: "Yes",
+				onclick1: onconfirm,
+				label2: "No",
+				onclick2: oncancel
+			};
+			var pt = new FlxPoint();
+			pt.x = FlxG.camera.x + 555;
+			pt.y = FlxG.camera.y + 350;
+			popup.show(pt);
+	}
+	
+	public function alert(msg:String, title:String = "ALERT:"){
+			popup.title = title;
+			popup.message = msg;
+			popup.questions = null;
+			var pt = new FlxPoint();
+			pt.x = FlxG.camera.x + 555;
+			pt.y = FlxG.camera.y + 350;
+			popup.show(pt);
+	}
 }

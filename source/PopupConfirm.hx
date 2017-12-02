@@ -53,18 +53,18 @@ class PopupConfirm extends FlxGroup
 	}
 	
 	public function clicked1(){
+		close();
 		if (questions != null)
 			if(questions.onclick1 != null)
 				questions.onclick1();
-		close();
 	}
 	
 	
 	public function clicked2(){
+		close();
 		if (questions != null)
 			if(questions.onclick2 != null)
 				questions.onclick2();
-		close();
 	}
 	
 	public function show(pos:FlxPoint){
