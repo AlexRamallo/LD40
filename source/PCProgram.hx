@@ -5,7 +5,7 @@ package;
  * @author Alejandro Ramallo
  */
 import flixel.FlxG;
-import source.PopupConfirm;
+import PopupConfirm;
 class PCProgram {
 	
 	public var data:PlayData;
