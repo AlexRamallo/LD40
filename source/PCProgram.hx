@@ -24,7 +24,6 @@ class PCProgram {
 		data = new PlayData();
 		popup = new PopupConfirm("", "", null);
 		popup.init();
-		FlxG.state.add(popup);
 	}
 	
 	public function boot(){

@@ -5,6 +5,7 @@ import flixel.math.FlxPoint;
 import flixel.ui.FlxButton;
 import flixel.text.FlxText;
 import flixel.group.FlxGroup;
+import flixel.FlxG;
 /**
  * ...
  * @author ...
@@ -29,13 +30,20 @@ class PopupConfirm extends FlxGroup
 	}
 	
 	public function init(){
-		txTitle = new FlxText();
-		txMsg = new FlxText();
+		txTitle = new FlxText(0,0,300);
+		txMsg = new FlxText(0,0,300);
 		btn1 = new FlxButton(0,0,"",clicked1);
-		btn2 = new FlxButton(0,0,"",clicked2);
+		btn2 = new FlxButton(0, 0, "", clicked2);
+		
+		btn1.scrollFactor.x = 1;
+		btn1.scrollFactor.y = 1;
+		
+		btn2.scrollFactor.x = 1;
+		btn2.scrollFactor.y = 1;
+		
 		bg = new FlxSprite();
 		
-		bg.loadGraphic(AssetPaths.popup__png, false, 400, 300);
+		bg.loadGraphic(AssetPaths.popup__png, false, 452, 352);
 		
 		add(bg);
 		add(txTitle);
@@ -45,15 +53,17 @@ class PopupConfirm extends FlxGroup
 	}
 	
 	public function clicked1(){
-		if(questions!=null)
-			questions.onclick1();
+		if (questions != null)
+			if(questions.onclick1 != null)
+				questions.onclick1();
 		close();
 	}
 	
 	
 	public function clicked2(){
-		if(questions!=null)
-			questions.onclick2();
+		if (questions != null)
+			if(questions.onclick2 != null)
+				questions.onclick2();
 		close();
 	}
 	
@@ -61,17 +71,17 @@ class PopupConfirm extends FlxGroup
 		bg.x = pos.x;
 		bg.y = pos.y;
 		
-		txTitle.x = bg.x + 10;
-		txTitle.y = bg.y + 10;
+		txTitle.x = bg.x + 60;
+		txTitle.y = bg.y + 45;
 		
-		txMsg.x = bg.x;
-		txMsg.y = txTitle.y + 50;
+		txMsg.x = bg.x + 60;
+		txMsg.y = txTitle.y + 80;
 		
-		btn1.x = bg.x + 30;
-		btn1.y = bg.y + (bg.height - 50);
+		btn1.x = bg.x + 60;
+		btn1.y = bg.y + (bg.height - 55);
 		
-		btn2.x = bg.x + 80;
-		btn2.y = bg.y + (bg.height - 50);
+		btn2.x = bg.x + 170;
+		btn2.y = bg.y + (bg.height - 55);
 		
 		if (questions == null){
 			btn1.text = "OK";
@@ -87,10 +97,13 @@ class PopupConfirm extends FlxGroup
 		txTitle.text = title;
 		txMsg.size = 16;
 		txMsg.text = message;
+		
+		FlxG.state.add(this);
 	}
 	
 	public function close(){
-		show(new FlxPoint(-1000, -1000));
+		show(new FlxPoint( -1000, -1000));
+		FlxG.state.remove(this);
 	}
 	
 }

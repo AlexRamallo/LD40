@@ -18,8 +18,16 @@ class HomeScreen extends BaseScreen{
 	}
 	
 	private function initHome(){
-		btnNewStunt = new FlxButton(0,0,"",function(){
-			prog.popup.show(new FlxPoint(banner.x + 100, banner.y + 100));
+		btnNewStunt = new FlxButton(0, 0, "", function(){
+			prog.popup.title = "Are you okay?";
+			prog.popup.message = "I ask because you worry me sometimes. Did you know that?";
+			prog.popup.questions = {
+				label1: "Yup",
+				onclick1: null,
+				label2: "I want 2 die",
+				onclick2: null
+			};
+			prog.popup.show(new FlxPoint(banner.x + 100, banner.y + 10));
 		});
 		btnPastStunts = new FlxButton();
 		btnAdNetworks = new FlxButton();
