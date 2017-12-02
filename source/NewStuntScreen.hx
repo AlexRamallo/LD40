@@ -211,11 +211,8 @@ class NewStuntScreen extends BaseScreen{
 		];
 		var eidx = Math.round(rating * (encouragement.length-1));
 		var msg = encouragement[eidx];
-		trace(stunt.getRisk());
-		trace(stunt.getDanger());
-		trace(eidx);
-		trace(msg);
 		prog.alert(msg);
+		prog.data.submitStunt(stunt);
 	}
 	
 	private function loadStagedStunts(){

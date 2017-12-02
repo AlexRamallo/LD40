@@ -16,14 +16,35 @@ class PlayData
 	
 	public var money:Int = 5000;
 	
-	private var actlist:Array<Stunt_Act>;
+	public var stunt_history:Array<Stunt> = [];
 	
+	private var actlist:Array<Stunt_Act>;	
 	public var acts_unlocked:Int;
 	public var subs_unlocked:Array<Int>;
 
 	public function new() 
 	{
 		
+	}
+	
+	public function submitStunt(stunt:Stunt){
+		stunt_history.push(stunt);
+		
+		//Calculate results here
+		var risk = stunt.getRisk();			//Likelihood of an accident
+		var danger = stunt.getDanger();		//Damage to health from accident
+		var stupid = stunt.getStupidity();	//Stupidness rating from 0-9 (special modifier)
+		//calculate: increase or loss in followers
+		
+		var accident:Bool = Math.random() <= risk;
+		
+		var damage = 0;
+
+		if (accident){
+			damage = danger;
+		}else{
+			
+		}
 	}
 	
 	//TODO: hardcode act data in here
@@ -52,9 +73,9 @@ class PlayData
 					new Stunt_Subject("a hobo",							70,		20,		7,			500),
 					new Stunt_Subject("a stray dog",					20,		40,		8,			1000),
 					new Stunt_Subject("a stray cat",					60,		40,		8,			1200),
-					new Stunt_Subject("a trash panda",					50,		60,		9,			2000),
-					new Stunt_Subject("a bear",							80,		80,		10,			5000),
-					new Stunt_Subject("a cocaine bear",					99,		99,		10,			10000),
+					new Stunt_Subject("a trash panda",					50,		60,		8,			2000),
+					new Stunt_Subject("a bear",							80,		80,		9,			5000),
+					new Stunt_Subject("a cocaine bear",					99,		99,		9,			10000),
 				]),
 				//			  NAME,										RISK,	DANGER,	STUPIDITY,	PRICE
 				new Stunt_Act("race",									10,		10,		0,			0, [
