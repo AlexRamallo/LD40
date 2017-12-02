@@ -143,6 +143,11 @@ class FormScreen_SelectAct extends BaseScreen{
 	}
 	
 	public function onClickNext(){
+		var sel:Stunt_Subject = cast prog.shared.get("formsel_Act");
+		if(sel == null){
+			prog.alert("You must select an act before continuing.");
+			return;
+		}
 		prog.openScreen(new FormScreen_SelectSubject(prog));
 	}
 	
@@ -161,15 +166,24 @@ class FormScreen_SelectAct extends BaseScreen{
 		remove(txTitle);
 		remove(txInstruct);
 		remove(statsBg);
-		
-		for (t in statsTxt)
-			remove(t);
-		
 		remove(btnNext);
 		remove(btnBack);
 		
-		for(o in options)
-			remove(o);		
+		for (t in statsTxt){
+			remove(t);
+			FlxDestroyUtil.destroy(t);
+		}
+		
+		for(o in options){
+			remove(o);
+			FlxDestroyUtil.destroy(o);
+		}
+			
+		FlxDestroyUtil.destroy(txTitle);
+		FlxDestroyUtil.destroy(txInstruct);
+		FlxDestroyUtil.destroy(statsBg);
+		FlxDestroyUtil.destroy(btnNext);
+		FlxDestroyUtil.destroy(btnBack);
 	}
 	
 	override public function onStep(elapsed:Float):Void {

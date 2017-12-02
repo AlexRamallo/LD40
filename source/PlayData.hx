@@ -30,28 +30,28 @@ class PlayData
 				//			  NAME,										RISK,	DANGER,	STUPIDITY,	PRICE
 				new Stunt_Act("eat",									0,		2,		0,			0, [
 					//				  NAME								%RISK	DANGER	STUPIDITY	PRICE
-					new Stunt_Subject("burger",							5,		2,		0,			0),
-					new Stunt_Subject("milk",							5,		2,		0,			0),
-					new Stunt_Subject("condiment sundae",				20,		5,		2,			15),
-					new Stunt_Subject("cinnamon",						25,		2,		3,			30),
-					new Stunt_Subject("habanero pepper",				35,		8,		5,			100),
-					new Stunt_Subject("ghost pepper",					50,		15,		7,			250),
-					new Stunt_Subject("carolina reaper pepper",			55,		15,		9,			500)
+					new Stunt_Subject("a burger",						5,		2,		0,			0),
+					new Stunt_Subject("some yogurt",					5,		2,		0,			0),
+					new Stunt_Subject("a condiment sundae",				20,		5,		2,			15),
+					new Stunt_Subject("some cinnamon",					25,		2,		3,			30),
+					new Stunt_Subject("a habanero pepper",				35,		8,		5,			100),
+					new Stunt_Subject("a ghost pepper",					50,		15,		7,			250),
+					new Stunt_Subject("a carolina reaper pepper",		55,		15,		9,			500)
 				]),
 				//			  NAME,										RISK,	DANGER,	STUPIDITY,	PRICE
-				new Stunt_Act("surprise hug a",							5,		5,		0,			0, [
+				new Stunt_Act("surprise hug",							5,		5,		0,			0, [
 					//				  NAME								%RISK	DANGER	STUPIDITY	PRICE
-					new Stunt_Subject("friend",							1,		1,		0,			0),
-					new Stunt_Subject("family member",					1,		1,		0,			0),
-					new Stunt_Subject("coworker",						10,		2,		3,			50),
-					new Stunt_Subject("boss",							40,		20,		5,			75),
-					new Stunt_Subject("stranger",						50,		25,		6,			250),
-					new Stunt_Subject("hobo",							70,		20,		7,			500),
-					new Stunt_Subject("stray dog",						20,		40,		8,			1000),
-					new Stunt_Subject("stray cat",						60,		40,		8,			1200),
-					new Stunt_Subject("trash panda",					50,		60,		9,			2000),
-					new Stunt_Subject("bear",							80,		80,		10,			5000),
-					new Stunt_Subject("cocaine bear",					99,		99,		10,			10000),
+					new Stunt_Subject("your friend",					0,		0,		0,			0),
+					new Stunt_Subject("your mom",						-100,	-100,	0,			0),
+					new Stunt_Subject("your coworker",					10,		2,		3,			50),
+					new Stunt_Subject("your boss",						40,		20,		5,			75),
+					new Stunt_Subject("a stranger",						50,		25,		6,			250),
+					new Stunt_Subject("a hobo",							70,		20,		7,			500),
+					new Stunt_Subject("a stray dog",					20,		40,		8,			1000),
+					new Stunt_Subject("a stray cat",					60,		40,		8,			1200),
+					new Stunt_Subject("a trash panda",					50,		60,		9,			2000),
+					new Stunt_Subject("a bear",							80,		80,		10,			5000),
+					new Stunt_Subject("a cocaine bear",					99,		99,		10,			10000),
 				]),
 				//			  NAME,										RISK,	DANGER,	STUPIDITY,	PRICE
 				new Stunt_Act("race",									10,		10,		0,			0, [

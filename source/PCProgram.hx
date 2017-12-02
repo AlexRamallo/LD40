@@ -50,7 +50,9 @@ class PCProgram {
 		var cur = screens.pop();
 		if(cur != null)
 			cur.onClose();
-		screens[screens.length - 1].onOpen();
+		var scr = screens[screens.length - 1];
+		scr.onOpen();
+		scr.setPos(anchor.x, anchor.y);
 	}
 	
 	public function goHome(){

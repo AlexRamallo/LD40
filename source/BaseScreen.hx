@@ -82,6 +82,12 @@ class BaseScreen extends LaptopScreen
 		updateBase();
 	}
 	override public function onClose():Void{
+		remove(banner);
+		remove(banner_avatar);
+		remove(banner_name);
+		remove(banner_followers);
+		remove(banner_money);
+		
 		FlxDestroyUtil.destroy(banner);
 		FlxDestroyUtil.destroy(banner_avatar);
 		FlxDestroyUtil.destroy(banner_name);

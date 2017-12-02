@@ -14,6 +14,7 @@ import flixel.group.FlxGroup;
 	 public var pair:{act:Stunt_Act, sub:Stunt_Subject};
 	 
 	 public var btnEdit:FlxButton;
+
 	 public var txLabel:FlxText;
 	 
 	 public var offset:Int;
@@ -54,7 +55,7 @@ import flixel.group.FlxGroup;
 	 public function updateUI(){
 		 txLabel.text = str();
 		 txLabel.x = root.x;
-		 txLabel.y = root.y + (60 * offset);
+		 txLabel.y = root.y + (40 * offset);
 		 
 		 btnEdit.x = txLabel.x + txLabel.fieldWidth + 5;
 		 btnEdit.y = txLabel.y;
@@ -89,13 +90,20 @@ import flixel.group.FlxGroup;
 			
 		 return pair.act.name + " " + pair.sub.name;
 	 }
+	 
+	 public function onDestroyMe(){
+		 remove(btnEdit);
+		 remove(txLabel);
+		 FlxDestroyUtil.destroy(btnEdit);
+		 FlxDestroyUtil.destroy(txLabel);
+	 }
  }
  
 class NewStuntScreen extends BaseScreen{
 	
 	public var txTitle:FlxText;
 	public var txInstruct:FlxText;
-	
+	public var btnSubmit:FlxButton;
 	public var actWidgets:Array<ActWidget>;
 	
 	public function new(p) 
@@ -106,6 +114,7 @@ class NewStuntScreen extends BaseScreen{
 	private function initUI(){
 		txTitle = new FlxText();
 		txInstruct = new FlxText();
+		btnSubmit = new FlxButton(0, 0, "SUBMIT", onSubmit);
 		
 		txTitle.text = "Post New Stunt";
 		txTitle.size = 16;
@@ -128,6 +137,7 @@ class NewStuntScreen extends BaseScreen{
 			add(w);
 		}
 		
+		add(btnSubmit);
 		add(txTitle);
 		add(txInstruct);		
 	}
@@ -136,7 +146,13 @@ class NewStuntScreen extends BaseScreen{
 		super.setPos(x, y);
 		
 		txTitle.x = banner.x + 30;
-		txTitle.y = banner.y + 110;
+		txTitle.y = banner.y + 110;		
+		 
+		btnSubmit.x = banner.x + 475;
+		btnSubmit.y = banner.y + 375;
+		
+		btnSubmit.scrollFactor.x = 1;
+		btnSubmit.scrollFactor.y = 1;
 		
 		txInstruct.x = txTitle.x;
 		txInstruct.y = txTitle.y + 30;
@@ -166,6 +182,11 @@ class NewStuntScreen extends BaseScreen{
 		}
 		
 		loadStagedStunts();
+	}	
+	
+	
+	public function onSubmit(){
+		prog.alert("Stunt submitted!");
 	}
 	
 	private function loadStagedStunts(){
@@ -182,8 +203,12 @@ class NewStuntScreen extends BaseScreen{
 		super.onClose();
 		remove(txTitle);
 		remove(txInstruct);
-		for (w in actWidgets)
+		remove(btnSubmit);
+		for (w in actWidgets){
+			w.onDestroyMe();
 			remove(w);
+			FlxDestroyUtil.destroy(w);
+		}
 	}
 	
 	override public function onStep(elapsed:Float):Void {

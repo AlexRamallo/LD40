@@ -161,7 +161,7 @@ class FormScreen_SelectSubject extends BaseScreen{
 	}
 	
 	public function onClickBack(){
-		//--
+		prog.goBack();
 	}
 	
 	override public function onOpen():Void {
@@ -183,15 +183,24 @@ class FormScreen_SelectSubject extends BaseScreen{
 		remove(txTitle);
 		remove(txInstruct);
 		remove(statsBg);
-		
-		for (t in statsTxt)
-			remove(t);
-		
 		remove(btnNext);
 		remove(btnBack);
 		
-		for(o in options)
+		for (t in statsTxt){
+			remove(t);
+			FlxDestroyUtil.destroy(t);
+		}
+		
+		for(o in options){
 			remove(o);
+			FlxDestroyUtil.destroy(o);
+		}
+			
+		FlxDestroyUtil.destroy(txTitle);
+		FlxDestroyUtil.destroy(txInstruct);
+		FlxDestroyUtil.destroy(statsBg);
+		FlxDestroyUtil.destroy(btnNext);
+		FlxDestroyUtil.destroy(btnBack);
 	}
 	
 	override public function onStep(elapsed:Float):Void {
