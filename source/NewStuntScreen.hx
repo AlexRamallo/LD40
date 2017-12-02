@@ -186,7 +186,36 @@ class NewStuntScreen extends BaseScreen{
 	
 	
 	public function onSubmit(){
-		prog.alert("Stunt submitted!");
+		var pairs = [];
+
+		for (a in actWidgets)
+			if(a.pair!=null)
+				pairs.push(a.pair);
+
+		var stunt:Stunt = new Stunt(pairs);
+		
+		var rating:Float = (stunt.getRisk() * stunt.getDanger()) / 100;
+		
+		var encouragement = [
+			"Stunt successfully submitted.",
+			"Good luck!",
+			"Good luck (you're going to need it)",
+			"Wow, that's cool!",
+			"You're insane!",
+			"Are you actually insane?",
+			"What is wrong with you?!",
+			"Get help. Seriously.",
+			"I hope the attention is worth it.",
+			"R.I.P.",
+			"R.I.P. IN PEACE"
+		];
+		var eidx = Math.round(rating * (encouragement.length-1));
+		var msg = encouragement[eidx];
+		trace(stunt.getRisk());
+		trace(stunt.getDanger());
+		trace(eidx);
+		trace(msg);
+		prog.alert(msg);
 	}
 	
 	private function loadStagedStunts(){

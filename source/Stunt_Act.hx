@@ -6,6 +6,7 @@ package;
  */
 class Stunt_Act 
 {
+	public var id:Int;
 	public var name(get, set):String;
 	private var _name:String;
 	

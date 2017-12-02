@@ -14,9 +14,12 @@ class PlayData
 	public var followers:Int = 0;
 	public var follower_data:Int = 0;
 	
-	public var money:Int = 0;
+	public var money:Int = 5000;
 	
 	private var actlist:Array<Stunt_Act>;
+	
+	public var acts_unlocked:Int;
+	public var subs_unlocked:Array<Int>;
 
 	public function new() 
 	{
@@ -65,6 +68,14 @@ class PlayData
 				])
 				////////////////////
 			];
+			
+			acts_unlocked = 0;
+			subs_unlocked = [];
+			for(i in 0...actlist.length){
+				subs_unlocked.push(0);
+				actlist[i].id = i;
+			}
+				
 		}
 		
 		return actlist;

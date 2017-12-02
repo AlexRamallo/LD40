@@ -1,6 +1,7 @@
 package;
 import flixel.math.FlxPoint;
 import flixel.ui.FlxButton;
+import flixel.util.FlxDestroyUtil;
 
 /**
  * ...
@@ -91,6 +92,10 @@ class HomeScreen extends BaseScreen{
 		remove(btnNewStunt);
 		remove(btnPastStunts);
 		remove(btnAdNetworks);
+		
+		FlxDestroyUtil.destroy(btnNewStunt);
+		FlxDestroyUtil.destroy(btnPastStunts);
+		FlxDestroyUtil.destroy(btnAdNetworks);
 	}
 	
 	override public function onStep(elapsed:Float):Void {

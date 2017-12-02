@@ -91,13 +91,32 @@ class FormScreen_SelectAct extends BaseScreen{
 	
 	public function onSelect(idx:Int){
 		//Handle selection
-		var acts = prog.data.getAllActs();
-		var sel = acts[idx];
-		prog.shared.set("formsel_Act", sel);
-		
-		statsTxt[0].text = "Risk:\n\n" + Math.round(sel.risk) + "%";
-		statsTxt[1].text = "Danger:\n\n" + sel.danger;
-		statsTxt[2].text = "Stupidity:\n\n" + sel.stupidity + "/10";
+		if (prog.data.acts_unlocked < idx){
+			if (prog.data.acts_unlocked != idx - 1)
+				prog.alert('You need to unlock the previous act first.');
+			else
+				prog.confirm(
+					"Purchase Act?",
+					"Pay $5000 to unlock this act?",
+					function(){
+						if(prog.data.money < 5000){
+							prog.alert('Uh oh! You only have $$${prog.data.money}.\n\nTip: Try selling your follower\'s data to advertisers',"You're broke!");
+						}else{
+							prog.data.money -= 5000;
+							prog.data.acts_unlocked++;
+							var rr:FormScreen_SelectAct = cast prog.refreshScreen();
+							rr.onSelect(idx);
+						}
+					});
+		}else{
+			var acts = prog.data.getAllActs();
+			var sel = acts[idx];
+			prog.shared.set("formsel_Act", sel);
+			
+			statsTxt[0].text = "Risk:\n\n" + Math.round(sel.risk) + "%";
+			statsTxt[1].text = "Danger:\n\n" + sel.danger;
+			statsTxt[2].text = "Stupidity:\n\n" + sel.stupidity + "/10";
+		}
 	}
 	
 	override public function setPos(x:Int, y:Int) {
@@ -136,7 +155,17 @@ class FormScreen_SelectAct extends BaseScreen{
 			var rx = i % rowSize;
 			var ry = Math.floor(i / rowSize);
 			
-			options[i].text = act.name;
+			if(prog.data.acts_unlocked >= i - 1){
+				options[i].text = act.name;
+				
+				if(prog.data.acts_unlocked >= i)
+					options[i].label.color = 0x000000;
+				else
+					options[i].label.color = 0xA40B00;
+			}else{
+				options[i].text = "???";
+			}
+				
 			options[i].x = root.x + (rx * hsep);
 			options[i].y = root.y + (ry * vsep);
 		}

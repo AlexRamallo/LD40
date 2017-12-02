@@ -46,6 +46,19 @@ class PCProgram {
 		FlxG.state.add(scr);
 	}
 	
+	public function refreshScreen():LaptopScreen{
+		var cur = screens.pop();
+		if (cur == null){
+			goHome();
+			return null;
+		}
+		cur.onClose();
+		
+		var nInst = Type.createInstance(Type.getClass(cur), [this]);
+		openScreen(nInst);
+		return nInst;
+	}
+	
 	public function goBack(){
 		var cur = screens.pop();
 		if(cur != null)

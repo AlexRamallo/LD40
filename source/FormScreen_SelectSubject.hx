@@ -93,13 +93,32 @@ class FormScreen_SelectSubject extends BaseScreen{
 	
 	public function onSelect(idx:Int){
 		//Handle selection
-		var subjects = selectedAct.subjects;
-		var sel = subjects[idx];
-		prog.shared.set("formsel_Subject", sel);
-		
-		statsTxt[0].text = "Risk:\n\n" + Math.round(sel.delta_risk) + "%";
-		statsTxt[1].text = "Danger:\n\n" + sel.delta_danger;
-		statsTxt[2].text = "Stupidity:\n\n" + sel.delta_stupidity + "/10";
+		if (prog.data.subs_unlocked[selectedAct.id] < idx){
+			if (prog.data.subs_unlocked[selectedAct.id] != idx - 1)
+				prog.alert('You need to unlock the previous subject first.');
+			else
+				prog.confirm(
+					"Purchase Subject?",
+					"Pay $1000 to unlock this subject?",
+					function(){
+						if(prog.data.money < 1000){
+							prog.alert('Uh oh! You only have $$${prog.data.money}.\n\nTip: Try selling your follower\'s data to advertisers',"You're broke!");
+						}else{
+							prog.data.money -= 1000;
+							prog.data.subs_unlocked[selectedAct.id]++;
+							var rr:FormScreen_SelectSubject = cast prog.refreshScreen();
+							rr.onSelect(idx);
+						}
+					});
+		}else{
+			var subjects = selectedAct.subjects;
+			var sel = subjects[idx];
+			prog.shared.set("formsel_Subject", sel);
+			
+			statsTxt[0].text = "Risk:\n\n" + Math.round(sel.delta_risk) + "%";
+			statsTxt[1].text = "Danger:\n\n" + sel.delta_danger;
+			statsTxt[2].text = "Stupidity:\n\n" + sel.delta_stupidity + "/10";
+		}
 	}
 	
 	override public function setPos(x:Int, y:Int) {
@@ -140,7 +159,18 @@ class FormScreen_SelectSubject extends BaseScreen{
 			var rx = i % rowSize;
 			var ry = Math.floor(i / rowSize);
 			
-			options[i].text = sub.name;
+			
+			if(prog.data.subs_unlocked[selectedAct.id] >= i - 1){
+				options[i].text = sub.name;
+				
+				if(prog.data.subs_unlocked[selectedAct.id] >= i)
+					options[i].label.color = 0x000000;
+				else
+					options[i].label.color = 0xA40B00;
+			}else{
+				options[i].text = "???";
+			}
+			
 			options[i].x = root.x + (rx * hsep);
 			options[i].y = root.y + (ry * vsep);
 		}
