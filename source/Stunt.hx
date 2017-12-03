@@ -12,6 +12,7 @@ class Stunt
 	
 	public var result_accident:Bool = false;
 	public var result_followers:Int = 0;
+	public var result_damage:Int = 0;
 	
 	public var pairs:Array<{act:Stunt_Act, sub:Stunt_Subject}>;
 	

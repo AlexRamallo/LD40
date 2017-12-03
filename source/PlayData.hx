@@ -14,6 +14,8 @@ class PlayData
 	public var followers:Int = 0;
 	public var follower_data:Int = 0;
 	
+	public var memory:Int = 5; //memory of your viewers
+	
 	public var money:Int = 5000;
 	
 	public var stunt_history:Array<Stunt> = [];
@@ -21,6 +23,9 @@ class PlayData
 	private var actlist:Array<Stunt_Act>;	
 	public var acts_unlocked:Int;
 	public var subs_unlocked:Array<Int>;
+	
+	public var prev_risk:Array<Float> = [];
+	public var prev_danger:Array<Int> = [];
 
 	public function new() 
 	{
@@ -30,21 +35,84 @@ class PlayData
 	public function submitStunt(stunt:Stunt){
 		stunt_history.push(stunt);
 		
+		var avg_risk:Float = 0;
+		var avg_danger:Int = 0;
+		
+		var risk_memory_sum:Float = 0;
+		for (r in prev_risk)
+			risk_memory_sum += r;
+		avg_risk = risk_memory_sum / memory;
+		
+		var danger_memory_sum:Float = 0;
+		for (d in prev_danger)
+			danger_memory_sum += r;
+		avg_danger = Std.int(danger_memory_sum / memory);
+		
 		//Calculate results here
 		var risk = stunt.getRisk();			//Likelihood of an accident
 		var danger = stunt.getDanger();		//Damage to health from accident
 		var stupid = stunt.getStupidity();	//Stupidness rating from 0-9 (special modifier)
+		
+		var net_risk = risk - avg_risk;
+		var net_danger = risk - avg_danger;
 		//calculate: increase or loss in followers
 		
 		var accident:Bool = Math.random() <= risk;
 		
 		var damage = 0;
-
+		/*
+		 * Stupidity modifier works as follows:
+		 * 	- If you avoid an accident in a high-risk stunt, you get a [stupidity bonus]
+		 *  - If you have an accident in a low-risk stunt, you get a [stupidity bonus]
+		 * 
+		 * Stupidity bonus is a bonus of extra followers
+		 * If stupidity bonus is achieved, and stupidity level is greater
+		 * than 5, then the `memory` stat will decrease by 1
+		 * 
+		 * If stupidity bonus is not achieved, and stupidity is greater than
+		 * 5, then the `memory` stat will increase by 1
+		 * 
+		 * min memory stat: 2
+		 * max memory stat: 10
+		 * 
+		 * [stupidity bonus] = 1000 * [stupidity level]
+		 * */
+		var stupidity_bonus = 0;
 		if (accident){
 			damage = danger;
+			if (risk < 0.5)
+				stupidity_bonus = 1000 * stupid;
 		}else{
-			
+			if (risk > 0.5)
+				stupidity_bonus = 1000 * stupid;
 		}
+		
+		if(stupid > 5){
+			if(stupidity_bonus != 0){
+				memory--;
+				if (memory < 2) memory = 2;
+			}else{
+				memory++;
+				if (memory > 10) memory = 10;
+			}
+		}
+		
+		//Followers gained from the stunt
+		var followers_from_stunt = (15000 * (danger / 100));
+		var followers_from_outcome = (5000 / (1 - risk)) / (accident?2:1);
+		
+		var loss_from_boredom = 0;
+		if(net_risk <= 0 && net_danger <= 0){
+			loss_from_boredom = Std.int(
+				(net_risk * followers_from_outcome)
+				+
+				(net_danger * followers_from_stunt)
+			);
+		}
+		
+		stunt.result_accident = accident;
+		stunt.result_followers = Std.int(followers_from_stunt + followers_from_outcome + stupidity_bonus);
+		stunt.result_damage = damage;
 	}
 	
 	//TODO: hardcode act data in here
