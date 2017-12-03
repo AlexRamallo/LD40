@@ -46,10 +46,10 @@ class Stunt
 		var ret:String = "";
 		var first:Bool = true;
 		for (p in pairs){
-			if(!first){
-				ret += " while ";
+			if(first)
 				first = false;
-			}
+			else
+				ret += " and ";
 			ret += p.act.name + " " + p.sub.name;
 		}
 		return ret;

@@ -71,6 +71,7 @@ class BaseScreen extends LaptopScreen
 		add(btnHome);
 	}
 	override public function setPos(x:Int, y:Int){
+		if (banner == null) return;
 		banner.x = x;
 		banner.y = y;
 		

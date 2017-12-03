@@ -8,6 +8,24 @@ import Stunt_Subject;
  */
 class PlayData 
 {
+	//GENERAL PRICES
+	public var cost_additional_stunt_slot:Int 	= 5000;
+	public var cost_unlock_act:Int 				= 5000;
+	public var cost_unlock_subject:Int 			= 1000;
+	public var cost_painkillers 				= 3000;
+	public var cost_painkillers2 				= 6000;
+	//////////////////////////////
+	
+	//OTC drugs
+	public var painkiller_recovery:Int = 100;
+	public var painkiller_tolerance:Float = 1;
+	public var painkiller_tolerance_rate:Float = 1.25;
+	
+	//Hospital drugs
+	public var painkiller2_recovery:Int = 100;
+	public var painkiller2_tolerance:Float = 1;
+	public var painkiller2_tolerance_rate:Float = 1.1;
+	
 	public var prog:PCProgram;
 	public var view:GameView;
 	
@@ -20,7 +38,7 @@ class PlayData
 	
 	public var memory:Int = 5; //memory of your viewers
 	
-	public var money:Int = 5000;
+	public var money:Int = 50000;
 	
 	public var stunt_history:Array<Stunt> = [];
 	
@@ -40,9 +58,7 @@ class PlayData
 		name = NameGenerator.generateName();
 	}
 	
-	public function submitStunt(stunt:Stunt){
-		stunt_history.push(stunt);
-		
+	public function submitStunt(stunt:Stunt){		
 		var avg_risk:Float = 0;
 		var avg_danger:Int = 0;
 		
@@ -121,10 +137,21 @@ class PlayData
 			);
 		}
 		
-		stunt.result_accident = accident;
-		stunt.result_followers = Std.int(followers_from_stunt + followers_from_outcome + stupidity_bonus - loss_from_boredom);
-		stunt.result_damage = damage;
+		var last_stunt = stunt_history[stunt_history.length];
+		var loss_from_repetition = 0;
+		if(last_stunt!=null){
+			if (last_stunt.getName() == stunt.getName())
+				loss_from_repetition = Std.int((followers_from_stunt + followers_from_outcome) / 2);
+		}
 		
+		stunt.result_accident = accident;
+		stunt.result_followers = Std.int(
+			  followers_from_stunt + followers_from_outcome + stupidity_bonus
+			- (loss_from_boredom + loss_from_repetition)
+		);
+		
+		stunt.result_damage = damage;
+		stunt_history.push(stunt);
 		giveRewards(stunt);
 	}
 	
@@ -147,7 +174,7 @@ class PlayData
 				//			  NAME,										RISK,	DANGER,	STUPIDITY,	PRICE
 				new Stunt_Act("eat",									0,		2,		0,			0, [
 					//				  NAME								%RISK	DANGER	STUPIDITY	PRICE
-					new Stunt_Subject("a burger",						5,		2,		0,			0),
+					new Stunt_Subject("a burger",						100,		2,		0,			0),
 					new Stunt_Subject("some yogurt",					5,		2,		0,			0),
 					new Stunt_Subject("a condiment sundae",				20,		5,		2,			15),
 					new Stunt_Subject("some cinnamon",					25,		2,		3,			30),

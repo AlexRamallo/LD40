@@ -121,6 +121,7 @@ class StuntResultsScreen extends BaseScreen{
 	public var txStuntRes_followers:FlxText;
 	public var txStuntRes_damage:FlxText;
 	public var txStuntRes_accident:FlxText;
+	public var sprInjured:FlxSprite;
 	
 	public var comments:Array<UserCommentWidget>;
 	private var numComments = 3;
@@ -132,6 +133,9 @@ class StuntResultsScreen extends BaseScreen{
 	}
 	
 	private function initUI(){
+		sprInjured = new FlxSprite();
+		sprInjured.loadGraphic(AssetPaths.injured__png, false, 200, 43);
+		
 		txStuntName = new FlxText();
 		txStuntComments = new FlxText();
 		txStuntRes = new FlxText();
@@ -163,6 +167,7 @@ class StuntResultsScreen extends BaseScreen{
 		txStuntRes_followers.text = "- Net Followers:\n    " + activeStunt.result_followers;
 		txStuntRes_accident.text = activeStunt.result_accident?"- ACCIDENT OCCURRED":"- NO ACCIDENTS";
 		txStuntRes_damage.text = "- " + activeStunt.result_damage + " Health Lost";
+		sprInjured.visible = activeStunt.result_accident;
 		
 		add(txStuntName);
 		add(txStuntComments);
@@ -170,6 +175,7 @@ class StuntResultsScreen extends BaseScreen{
 		add(txStuntRes_followers);
 		add(txStuntRes_damage);
 		add(txStuntRes_accident);
+		add(sprInjured);
 		
 		for(i in 0...numComments){
 			var cw = new UserCommentWidget();
@@ -183,7 +189,7 @@ class StuntResultsScreen extends BaseScreen{
 		super.setPos(x, y);
 		
 		txStuntName.x = banner.x + 10;
-		txStuntName.y = banner.y + 108;
+		txStuntName.y = banner.y + 102;
 		
 		txStuntRes.x = txStuntName.x;
 		txStuntRes.y = txStuntName.y + 50;
@@ -196,6 +202,9 @@ class StuntResultsScreen extends BaseScreen{
 		
 		txStuntRes_followers.x = txStuntRes_damage.x;
 		txStuntRes_followers.y = txStuntRes_damage.y + 30;
+		
+		sprInjured.x = txStuntRes_followers.x;
+		sprInjured.y = txStuntRes_followers.y + 80;
 		
 		var spacing = 86;
 		for(i in 0...comments.length){
@@ -212,7 +221,7 @@ class StuntResultsScreen extends BaseScreen{
 	
 	override public function onOpen():Void {
 		show_banner2 = true;
-		banner2_offset = 62;
+		banner2_offset = 58;
 		super.onOpen();
 		
 		activeStunt = prog.shared.get("form_results_active_stunt");
@@ -240,6 +249,7 @@ class StuntResultsScreen extends BaseScreen{
 		remove(txStuntRes_followers);
 		remove(txStuntRes_damage);
 		remove(txStuntRes_accident);
+		remove(sprInjured);
 		
 		FlxDestroyUtil.destroy(txStuntName);
 		FlxDestroyUtil.destroy(txStuntComments);
@@ -247,10 +257,20 @@ class StuntResultsScreen extends BaseScreen{
 		FlxDestroyUtil.destroy(txStuntRes_followers);
 		FlxDestroyUtil.destroy(txStuntRes_damage);
 		FlxDestroyUtil.destroy(txStuntRes_accident);
+		FlxDestroyUtil.destroy(sprInjured);
 	}
 	
+	private var flashct:Float = 0;
 	override public function onStep(elapsed:Float):Void {
 		super.onStep(elapsed);
+		
+		if(activeStunt.result_accident){
+			flashct += elapsed;
+			if(flashct >= 1){
+				sprInjured.visible = !sprInjured.visible;
+				flashct = 0;
+			}
+		}
 	}
 	
 }

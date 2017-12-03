@@ -99,6 +99,8 @@ class HomeScreen extends BaseScreen{
 	
 	override public function setPos(x:Int, y:Int) {
 		super.setPos(x, y);
+		
+		if (txTitle == null) return;
 				
 		txTitle.x = banner.x + 30;
 		txTitle.y = banner.y + 110;

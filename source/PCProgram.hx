@@ -30,16 +30,15 @@ class PCProgram {
 		y: 0
 	};
 
-	public function new(v:GameView) {
-		view = v;
+	public function new() {
 		screens = [];
 		shared = new StringMap<Dynamic>();
 		data = new PlayData(this);
-		popup = new PopupConfirm("", "", null);
-		popup.init();
 	}
 	
 	public function boot(){
+		popup = new PopupConfirm("", "", null);
+		popup.init();
 		openScreen(new HomeScreen(this));
 	}
 	
@@ -106,8 +105,8 @@ class PCProgram {
 	
 	public function goHome(){
 		for (s in screens)
-			s.onClose();
-		boot();
+			s.onClose();		
+		openScreen(new HomeScreen(this));
 	}
 	
 	public function confirm(title, msg, onconfirm:Void->Void, ?oncancel:Void->Void){

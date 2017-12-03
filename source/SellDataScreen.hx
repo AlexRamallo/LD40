@@ -107,7 +107,7 @@ class MerchantWidget extends FlxGroup{
 		txDescription.alignment = CENTER;
 		
 		txRate.x = txDescription.x;
-		txRate.y = bg.y + bg.height - 61 - 12;
+		txRate.y = bg.y + bg.height - 61 - 15;
 		txRate.autoSize = false;
 		txRate.fieldWidth = 150;
 		txRate.alignment = RIGHT;
@@ -193,7 +193,7 @@ class SellDataScreen extends BaseScreen{
 		merchants = [
 			new MerchantWidget(prog,
 				"Dirty Earl's Masturbatorium Emporium",
-				"Don't by shy, Dirty E will buy absolutely ANY data you have on you!",
+				"Don't by shy, Dirty E will buy absolutely ANY data you have to offer!",
 				1, 		//Basket
 				0.25),	//Rate
 			new MerchantWidget(prog,
@@ -236,7 +236,7 @@ class SellDataScreen extends BaseScreen{
 		for (i in 0...merchants.length){
 			var m = merchants[i];
 			m.x = banner.x + 10 + (190 * i);
-			m.y = txAvailableData.y + 40;
+			m.y = txAvailableData.y + 20;
 		}
 	}
 	

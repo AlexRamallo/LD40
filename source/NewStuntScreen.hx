@@ -60,6 +60,9 @@ import flixel.group.FlxGroup;
 		 btnEdit.x = txLabel.x + txLabel.fieldWidth + 5;
 		 btnEdit.y = txLabel.y;
 		 
+		 var av = prog.shared.get('stunt_slots_active_$offset');
+		 available = (av != null && av == true) || offset == 0;
+		 
 		 if(available){
 			 btnEdit.text = "edit";
 		 }else{
@@ -71,17 +74,27 @@ import flixel.group.FlxGroup;
 		 if(!available){
 			 prog.confirm(
 				"Purchase Slot?",
-				"To add another act, you must invest an additional $5000",
+				'To add another act, you must invest an additional ${prog.data.cost_additional_stunt_slot}',
 				function(){
-					//TODO:
-					//reduce money
-					//activate widget
+					if(prog.data.money >= prog.data.cost_additional_stunt_slot){
+						prog.data.money -= prog.data.cost_additional_stunt_slot;
+						available = true;
+						doLaunchSelectionFlow();
+						prog.shared.set('stunt_slots_active_$offset', true);
+					}else{
+						prog.alert("Not enough money");
+					}
 				});
 		 }else{
 			 //Launch act selection dialog
-			 prog.shared.set('formsel_targ', {idx: offset});
-			 prog.openScreen(new FormScreen_SelectAct(prog));
+			 doLaunchSelectionFlow();
 		 }
+	 }
+	 
+	 private function doLaunchSelectionFlow(){
+		//Launch act selection dialog
+		prog.shared.set('formsel_targ', {idx: offset});
+		prog.openScreen(new FormScreen_SelectAct(prog));
 	 }
 	 
 	 public function str():String{
@@ -128,7 +141,7 @@ class NewStuntScreen extends BaseScreen{
 		actWidgets = [
 			new ActWidget(prog, root, 0),
 			new ActWidget(prog, root, 1),
-			new ActWidget(prog, root, 2)
+			//new ActWidget(prog, root, 2)
 		];
 		actWidgets[0].available = true;
 		
@@ -193,6 +206,11 @@ class NewStuntScreen extends BaseScreen{
 		for (a in actWidgets)
 			if(a.pair!=null)
 				pairs.push(a.pair);
+			
+		if(pairs.length == 0){
+			prog.alert("You must add at least 1 act before submitting the stunt");
+			return;
+		}
 
 		var stunt:Stunt = new Stunt(pairs);
 		
@@ -214,7 +232,15 @@ class NewStuntScreen extends BaseScreen{
 		var eidx = Math.round(rating * (encouragement.length-1));
 		var msg = encouragement[eidx];
 		prog.data.submitStunt(stunt);
+		
 		prog.shared.set("form_results_active_stunt", stunt);
+		
+		for (i in 0...actWidgets.length){
+			prog.shared.set('stunt_slots_active_$i', false);
+			prog.shared.set('staged_act_$i', null);
+			prog.shared.set('staged_subject_$i', null);
+		}
+		
 		prog.openScreen(new StuntResultsScreen(prog));
 		prog.alert(msg);
 	}
