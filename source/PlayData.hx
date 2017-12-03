@@ -45,7 +45,7 @@ class PlayData
 		
 		var danger_memory_sum:Float = 0;
 		for (d in prev_danger)
-			danger_memory_sum += r;
+			danger_memory_sum += d;
 		avg_danger = Std.int(danger_memory_sum / memory);
 		
 		//Calculate results here
@@ -111,7 +111,7 @@ class PlayData
 		}
 		
 		stunt.result_accident = accident;
-		stunt.result_followers = Std.int(followers_from_stunt + followers_from_outcome + stupidity_bonus);
+		stunt.result_followers = Std.int(followers_from_stunt + followers_from_outcome + stupidity_bonus - loss_from_boredom);
 		stunt.result_damage = damage;
 	}
 	
