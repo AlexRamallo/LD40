@@ -75,6 +75,7 @@ class PCProgram {
 		if(cur != null)
 			cur.onClose();
 		screens.push(scr);
+		popup.close();
 		scr.onOpen();
 		scr.setPos(anchor.x, anchor.y);
 		FlxG.state.add(scr);

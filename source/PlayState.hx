@@ -17,17 +17,18 @@ class PlayState extends FlxState
 	{
 		super.create();
 		view = new GameView();
-		add(view.bg);
 		
 		if(prog == null)
 			prog = new PCProgram();
 		prog.view = view;
 		prog.anchor = view.anchor_scr;
-		prog.boot();
 		
-		view.prog = prog;
+		view.prog = prog;		
+		
+		
+		view.loadBg();
+		prog.boot();
 		view.showRoom();
-		add(view.initPainkiller());
 	}
 
 	override public function update(elapsed:Float):Void

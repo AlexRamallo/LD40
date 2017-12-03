@@ -102,6 +102,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
 		Font.registerFont (__ASSET__flixel_fonts_nokiafc22_ttf);
 		Font.registerFont (__ASSET__flixel_fonts_monsterrat_ttf);
 		
@@ -111,6 +113,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -702,6 +706,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf);
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_monsterrat_ttf);
 		
@@ -781,6 +787,10 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/images/hospital.png", AssetType.IMAGE);
 		path.set ("assets/images/injured.png", "assets/images/injured.png");
 		type.set ("assets/images/injured.png", AssetType.IMAGE);
+		path.set ("assets/images/keys1.png", "assets/images/keys1.png");
+		type.set ("assets/images/keys1.png", AssetType.IMAGE);
+		path.set ("assets/images/keys2.png", "assets/images/keys2.png");
+		type.set ("assets/images/keys2.png", AssetType.IMAGE);
 		path.set ("assets/images/merchant_back.png", "assets/images/merchant_back.png");
 		type.set ("assets/images/merchant_back.png", AssetType.IMAGE);
 		path.set ("assets/images/painkillers.png", "assets/images/painkillers.png");
@@ -921,6 +931,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 		id = "assets/images/injured.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
+		id = "assets/images/keys1.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/keys2.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
 		id = "assets/images/merchant_back.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
@@ -989,6 +1005,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -1813,6 +1831,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_beep_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_flixel_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_fonts_nokiafc22_ttf extends null { }
@@ -1822,6 +1842,8 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 #elseif html5
+
+
 
 
 
