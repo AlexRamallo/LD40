@@ -12,6 +12,8 @@ class HomeScreen extends BaseScreen{
 	public var txTitle:FlxText;
 	public var txInstruct:FlxText;
 	
+	public var txCredits:FlxText;
+	
 	public var btnNewStunt:FlxButton;
 	public var btnPastStunts:FlxButton;
 	public var btnAdNetworks:FlxButton;
@@ -28,6 +30,7 @@ class HomeScreen extends BaseScreen{
 		
 		txTitle = new FlxText();
 		txInstruct = new FlxText();
+		txCredits = new FlxText();
 		
 		txTitle.text = "Welcome to coolstunts.geocities.com!";
 		txTitle.size = 16;
@@ -37,6 +40,10 @@ class HomeScreen extends BaseScreen{
 		txInstruct.size = 12;
 		txInstruct.color = 0xFFFFFF;		
 		txInstruct.fieldWidth = 450;
+		
+		txCredits.text = "Created in 48 hours for Ludum Dare 40 by @AlexRamallo";
+		txCredits.size = 12;
+		txCredits.color = 0xFF4800;		
 		
 		btnPastStunts = new FlxButton();
 		btnAdNetworks = new FlxButton();
@@ -81,6 +88,7 @@ class HomeScreen extends BaseScreen{
 				
 		add(txTitle);
 		add(txInstruct);
+		add(txCredits);
 		add(btnNewStunt);
 		add(btnPastStunts);
 		add(btnAdNetworks);
@@ -95,6 +103,11 @@ class HomeScreen extends BaseScreen{
 		txInstruct.x = txTitle.x;
 		txInstruct.y = txTitle.y + 30;
 		
+		txCredits.x = banner.x + 10;
+		txCredits.y = banner.y + 420 - 20;
+		txCredits.fieldWidth = 550;
+		txCredits.alignment = CENTER;
+		txCredits.autoSize = false;
 		
 		btnNewStunt.x = banner.x + 10;
 		btnNewStunt.y = banner.y + 210;
@@ -119,12 +132,14 @@ class HomeScreen extends BaseScreen{
 				
 		remove(txTitle);
 		remove(txInstruct);
+		remove(txCredits);
 		remove(btnNewStunt);
 		remove(btnPastStunts);
 		remove(btnAdNetworks);
 					
 		FlxDestroyUtil.destroy(txTitle);
 		FlxDestroyUtil.destroy(txInstruct);
+		FlxDestroyUtil.destroy(txCredits);
 		FlxDestroyUtil.destroy(btnNewStunt);
 		FlxDestroyUtil.destroy(btnPastStunts);
 		FlxDestroyUtil.destroy(btnAdNetworks);
