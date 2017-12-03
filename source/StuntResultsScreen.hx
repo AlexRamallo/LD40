@@ -226,7 +226,7 @@ class StuntResultsScreen extends BaseScreen{
 		super.onClose();
 		
 		for(i in 0...numComments){
-			var cw = new UserCommentWidget();
+			var cw = comments[i];
 			cw.onDestroyMe();
 			FlxDestroyUtil.destroy(cw);
 			remove(cw);

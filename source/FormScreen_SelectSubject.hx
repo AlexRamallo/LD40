@@ -39,11 +39,11 @@ class FormScreen_SelectSubject extends BaseScreen{
 		
 		txTitle.text = "Select Subject for \""+selectedAct.name+"\"";
 		txTitle.size = 16;
-		txTitle.color = 0xFF4800;
+		txTitle.color = 0xFFFFFF;
 		
 		txInstruct.text = "choose the subject that you wish to perform the act on";
 		txInstruct.size = 12;
-		txInstruct.color = 0xFF4800;
+		txInstruct.color = 0xFFFFFF;
 		
 		statsTxt = [
 			new FlxText(),
@@ -150,9 +150,9 @@ class FormScreen_SelectSubject extends BaseScreen{
 		
 		
 		var subjects = selectedAct.subjects;
-		var root = new FlxPoint(txInstruct.x, txInstruct.y + 30);
+		var root = new FlxPoint(txInstruct.x, txInstruct.y + 40);
 		var hsep = 100;
-		var vsep = 50;
+		var vsep = 35;
 		for(i in 0...options.length){
 			var sub:Stunt_Subject = subjects[i];
 			
@@ -195,6 +195,8 @@ class FormScreen_SelectSubject extends BaseScreen{
 	}
 	
 	override public function onOpen():Void {
+		show_banner2 = true;
+		banner2_offset = 35;
 		super.onOpen();
 		
 		selectedAct = prog.shared.get("formsel_Act");

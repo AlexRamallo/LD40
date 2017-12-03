@@ -17,6 +17,11 @@ class BaseScreen extends LaptopScreen
 	public var btnHome:FlxButton;
 	
 	public var banner:FlxSprite;
+	public var banner2:FlxSprite;
+	
+	public var banner2_offset:Int = 0;	
+	public var show_banner2:Bool = false;
+	
 	public var banner_avatar:UserAvatar;
 	
 	public var banner_name:FlxText;
@@ -33,6 +38,13 @@ class BaseScreen extends LaptopScreen
 		banner = new FlxSprite();
 		banner.loadGraphic(AssetPaths.banner__png, false, 570, 100);
 		banner.pixelPerfectRender = true;
+		
+		if(show_banner2){
+			banner2 = new FlxSprite();
+			banner2.loadGraphic(AssetPaths.banner2__png, false, 570, 100);
+			banner2.pixelPerfectRender = true;
+			add(banner2);
+		}
 		
 		banner_avatar = prog.data.avatar;//new UserAvatar();
 		
@@ -61,6 +73,11 @@ class BaseScreen extends LaptopScreen
 	override public function setPos(x:Int, y:Int){
 		banner.x = x;
 		banner.y = y;
+		
+		if(banner2!=null){
+			banner2.x = banner.x;
+			banner2.y = banner.y + 100 - banner2_offset;
+		}
 		
 		banner_avatar.x = banner.x + 10;
 		banner_avatar.y = banner.y + 10;
@@ -94,6 +111,7 @@ class BaseScreen extends LaptopScreen
 	}
 	override public function onClose():Void{
 		remove(banner);
+		remove(banner2);
 		remove(banner_avatar);
 		remove(banner_name);
 		remove(banner_followers);
@@ -102,6 +120,7 @@ class BaseScreen extends LaptopScreen
 		
 		FlxDestroyUtil.destroy(btnHome);
 		FlxDestroyUtil.destroy(banner);
+		FlxDestroyUtil.destroy(banner2);
 		FlxDestroyUtil.destroy(banner_name);
 		FlxDestroyUtil.destroy(banner_followers);
 		FlxDestroyUtil.destroy(banner_money);

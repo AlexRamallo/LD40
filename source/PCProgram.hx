@@ -25,14 +25,13 @@ class PCProgram {
 	public function new() {
 		screens = [];
 		shared = new StringMap<Dynamic>();
-		home = new HomeScreen(this);
 		data = new PlayData(this);
 		popup = new PopupConfirm("", "", null);
 		popup.init();
 	}
 	
 	public function boot(){
-		openScreen(home);
+		openScreen(new HomeScreen(this));
 	}
 	
 	public function openScreen(scr:LaptopScreen){
@@ -68,10 +67,8 @@ class PCProgram {
 	}
 	
 	public function goHome(){
-		var cur = screens.pop();
-		if(cur != null)
-			cur.onClose();
-		screens = [];
+		for (s in screens)
+			s.onClose();
 		boot();
 	}
 	

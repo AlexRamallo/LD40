@@ -37,11 +37,11 @@ class FormScreen_SelectAct extends BaseScreen{
 		
 		txTitle.text = "Select Act Type";
 		txTitle.size = 16;
-		txTitle.color = 0xFF4800;
+		txTitle.color = 0xFFFFFF;
 		
 		txInstruct.text = "choose the type of act you wish to perform";
 		txInstruct.size = 12;
-		txInstruct.color = 0xFF4800;
+		txInstruct.color = 0xFFFFFF;
 		
 		statsTxt = [
 			new FlxText(),
@@ -146,9 +146,9 @@ class FormScreen_SelectAct extends BaseScreen{
 		
 		
 		var acts = prog.data.getAllActs();
-		var root = new FlxPoint(txInstruct.x, txInstruct.y + 30);
+		var root = new FlxPoint(txInstruct.x, txInstruct.y + 40);
 		var hsep = 100;
-		var vsep = 50;
+		var vsep = 35;
 		for(i in 0...options.length){
 			var act:Stunt_Act = acts[i];
 			
@@ -185,6 +185,8 @@ class FormScreen_SelectAct extends BaseScreen{
 	}
 	
 	override public function onOpen():Void {
+		show_banner2 = true;
+		banner2_offset = 35;
 		super.onOpen();
 		initUI();
 	}

@@ -116,13 +116,13 @@ class NewStuntScreen extends BaseScreen{
 		txInstruct = new FlxText();
 		btnSubmit = new FlxButton(0, 0, "SUBMIT", onSubmit);
 		
-		txTitle.text = "Post New Stunt";
-		txTitle.size = 16;
-		txTitle.color = 0xFF4800;
+		txTitle.text = "PERFORM NEW STUNT";
+		txTitle.size = 24;
+		txTitle.color = 0xFFFFFF;
 		
-		txInstruct.text = "edit the acts you want to perform below";
+		txInstruct.text = "Add acts to your stunt below, and press the submit button when you're finished";
 		txInstruct.size = 12;
-		txInstruct.color = 0xFF4800;
+		txInstruct.color = 0xFFFFFF;
 		
 		var root = new FlxPoint(0,0);
 		actWidgets = [
@@ -156,8 +156,9 @@ class NewStuntScreen extends BaseScreen{
 		
 		txInstruct.x = txTitle.x;
 		txInstruct.y = txTitle.y + 30;
+		txInstruct.fieldWidth = 300;
 		
-		var root = new FlxPoint(banner.x + 20, txInstruct.y + 50);
+		var root = new FlxPoint(banner.x + 20, txInstruct.y + 100);
 		for(w in actWidgets){
 			w.root = root;
 			w.updateUI();
@@ -165,6 +166,7 @@ class NewStuntScreen extends BaseScreen{
 	}
 	
 	override public function onOpen():Void {
+		show_banner2 = true;
 		super.onOpen();
 		initUI();
 		
