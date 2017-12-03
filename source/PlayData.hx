@@ -1,7 +1,7 @@
 package;
 import Stunt_Act;
 import Stunt_Subject;
-
+import flixel.FlxG;
 /**
  * ...
  * @author Alejandro Ramallo
@@ -48,17 +48,131 @@ class PlayData
 	
 	public var prev_risk:Array<Float> = [];
 	public var prev_danger:Array<Int> = [];
+	
+	public var dumb_luck:Float = 0;
 
 	public function new(p) 
 	{
 		prog = p;
-		view = prog.view;
 		avatar = new UserAvatar();
 		avatar.initRandom();
 		name = NameGenerator.generateName();
+		
+		/////////// DEBUGGING
+		FlxG.log.redirectTraces = true;
+		FlxG.watch.add(this, "dumb_luck", "dumb luck");
+		FlxG.watch.add(this, "memory", "viewer memory");
+		FlxG.watch.add(this, "prev_risk", "p.Risk");
+		FlxG.watch.add(this, "prev_danger", "p.Danger");
+		/////////////////////
 	}
 	
-	public function submitStunt(stunt:Stunt){		
+	public function submitStunt(stunt:Stunt){
+		
+		var lastStunt = stunt_history[stunt_history.length - 1];
+		if (lastStunt == null)
+			lastStunt = new Stunt([]);
+		
+		//Calculate results here
+		var risk = stunt.getRisk();			//Likelihood of an accident
+		var danger = stunt.getDanger();		//Damage to health from accident
+		var stupid = stunt.getStupidity();	//Stupidness rating from 0-9 (special modifier)
+		
+		prev_risk.push(risk);
+		prev_danger.push(danger);
+		
+		var net_risk = risk - lastStunt.getRisk();
+		var net_danger = risk - lastStunt.getDanger();
+		//calculate: increase or loss in followers
+		
+		//Dumb luck decreases risk
+		risk -= dumb_luck;
+		if (risk < 0)
+			risk = 0;
+		dumb_luck *= 0.9;
+		
+		var accident:Bool = Math.random() <= risk;
+		
+		var damage = 0;
+		/*
+		 * Stupidity modifier works as follows:
+		 * 	- If you avoid an accident in a high-risk stunt, you get a [stupidity bonus]
+		 * 		- if not, then your dumb luck is reset
+		 *  - If you have an accident in a low-risk stunt, you get a [stupidity bonus]
+		 * 
+		 * Stupidity bonus is a bonus of extra followers
+		 * If stupidity bonus is achieved, and stupidity level is greater
+		 * than 5, then the `memory` stat will decrease by 1
+		 * 
+		 * If stupidity bonus is not achieved, and stupidity is greater than
+		 * 5, then the `memory` stat will increase by 1
+		 * 
+		 * min memory stat: 2
+		 * max memory stat: 5
+		 * 
+		 * [stupidity bonus] = 1000 * [stupidity level]
+		 * */
+		var stupidity_bonus = 0;
+		if (accident){
+			damage = danger;
+			if (risk < 0.5)
+				stupidity_bonus = 1000 * stupid;
+			else
+				dumb_luck = 0;
+		}else{
+			if (risk > 0.5)
+				stupidity_bonus = 1000 * stupid;
+		}
+		
+		if(stupid > 5){
+			if(stupidity_bonus != 0){
+				memory--;
+				if (memory < 2) memory = 2;
+			}else{
+				memory++;
+				if (memory > 10) memory = 10;
+			}
+		}
+		
+		//Followers gained from the stunt
+		var followers_from_stunt = (250000 * (danger / 100)) + (250000 * risk);
+		
+		/*var loss_from_boredom = 0;
+		if(net_risk <= 0 && net_danger <= 0){
+			loss_from_boredom = Std.int(
+				(net_risk * followers_from_outcome)
+				+
+				(net_danger * followers_from_stunt)
+			);
+		}*/
+		
+		var loss_from_recent = 0;
+		var loss_from_repeat = 1;
+		for(i in 0...stunt_history.length){
+			var pst = stunt_history[(stunt_history.length - 1) - i];
+			var match = false;			
+			if(pst!=null)
+				match = pst.getName() == stunt.getName();
+				
+			if(i < memory && match)
+				loss_from_recent += 1;
+				
+			if (match)
+				loss_from_repeat += 1;
+		}
+		
+		stunt.result_accident = accident;
+		stunt.result_followers = Std.int(
+			  (followers_from_stunt / loss_from_repeat) + stupidity_bonus
+			- (loss_from_recent * followers_from_stunt)
+		);
+		
+		stunt.result_damage = damage;
+		stunt_history.push(stunt);
+		giveRewards(stunt);
+	}
+	
+	public function submitStunt2(stunt:Stunt){		
 		var avg_risk:Float = 0;
 		var avg_danger:Int = 0;
 		
@@ -84,12 +198,19 @@ class PlayData
 		var net_danger = risk - avg_danger;
 		//calculate: increase or loss in followers
 		
+		//Dumb luck decreases risk
+		risk -= dumb_luck;
+		if (risk < 0)
+			risk = 0;
+		dumb_luck *= 0.9;
+		
 		var accident:Bool = Math.random() <= risk;
 		
 		var damage = 0;
 		/*
 		 * Stupidity modifier works as follows:
 		 * 	- If you avoid an accident in a high-risk stunt, you get a [stupidity bonus]
+		 * 		- if not, then your dumb luck is reset
 		 *  - If you have an accident in a low-risk stunt, you get a [stupidity bonus]
 		 * 
 		 * Stupidity bonus is a bonus of extra followers
@@ -100,7 +221,7 @@ class PlayData
 		 * 5, then the `memory` stat will increase by 1
 		 * 
 		 * min memory stat: 2
-		 * max memory stat: 10
+		 * max memory stat: 5
 		 * 
 		 * [stupidity bonus] = 1000 * [stupidity level]
 		 * */
@@ -109,6 +230,8 @@ class PlayData
 			damage = danger;
 			if (risk < 0.5)
 				stupidity_bonus = 1000 * stupid;
+			else
+				dumb_luck = 0;
 		}else{
 			if (risk > 0.5)
 				stupidity_bonus = 1000 * stupid;
@@ -126,7 +249,7 @@ class PlayData
 		
 		//Followers gained from the stunt
 		var followers_from_stunt = net_danger>=0?(15000 * (danger / 100)):0;
-		var followers_from_outcome = net_risk>=0?((5000 / (1 - risk)) / (accident?2:1)):0;
+		var followers_from_outcome = net_risk>=0?((15000 / (1 - risk)) / (accident?2:1)):0;
 		
 		var loss_from_boredom = 0;
 		if(net_risk <= 0 && net_danger <= 0){
@@ -174,7 +297,7 @@ class PlayData
 				//			  NAME,										RISK,	DANGER,	STUPIDITY,	PRICE
 				new Stunt_Act("eat",									0,		2,		0,			0, [
 					//				  NAME								%RISK	DANGER	STUPIDITY	PRICE
-					new Stunt_Subject("a burger",						100,		2,		0,			0),
+					new Stunt_Subject("a burger",						1,		2,		0,			0),
 					new Stunt_Subject("some yogurt",					5,		2,		0,			0),
 					new Stunt_Subject("a condiment sundae",				20,		5,		2,			15),
 					new Stunt_Subject("some cinnamon",					25,		2,		3,			30),

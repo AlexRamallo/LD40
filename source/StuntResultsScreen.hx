@@ -166,7 +166,7 @@ class StuntResultsScreen extends BaseScreen{
 		txStuntRes.text = "STUNT RESULTS:";
 		txStuntRes_followers.text = "- Net Followers:\n    " + activeStunt.result_followers;
 		txStuntRes_accident.text = activeStunt.result_accident?"- ACCIDENT OCCURRED":"- NO ACCIDENTS";
-		txStuntRes_damage.text = "- " + activeStunt.result_damage + " Health Lost";
+		txStuntRes_damage.text = "- Lost " + activeStunt.result_damage + " Health";
 		sprInjured.visible = activeStunt.result_accident;
 		
 		add(txStuntName);
@@ -221,7 +221,7 @@ class StuntResultsScreen extends BaseScreen{
 	
 	override public function onOpen():Void {
 		show_banner2 = true;
-		banner2_offset = 58;
+		banner2_offset = 54;
 		super.onOpen();
 		
 		activeStunt = prog.shared.get("form_results_active_stunt");

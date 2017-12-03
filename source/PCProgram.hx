@@ -105,8 +105,10 @@ class PCProgram {
 	}
 	
 	public function goHome(){
-		for (s in screens)
-			s.onClose();		
+		for (s in screens){
+			s.onClose();
+			screens.remove(s);
+		}
 		openScreen(new HomeScreen(this));
 	}
 	

@@ -1,4 +1,5 @@
 package;
+import flixel.FlxSprite;
 import flixel.math.FlxPoint;
 import flixel.ui.FlxButton;
 import flixel.util.FlxDestroyUtil;
@@ -13,6 +14,9 @@ class HomeScreen extends BaseScreen{
 	public var txInstruct:FlxText;
 	
 	public var txCredits:FlxText;
+	
+	public var txStuntsInfo:FlxText;
+	public var txStunts:Array<FlxText>;
 	
 	public var btnNewStunt:FlxButton;
 	public var btnPastStunts:FlxButton;
@@ -35,6 +39,7 @@ class HomeScreen extends BaseScreen{
 		txTitle = new FlxText();
 		txInstruct = new FlxText();
 		txCredits = new FlxText();
+		txStuntsInfo = new FlxText();
 		
 		txTitle.text = "Welcome to coolstunts.geocities.com!";
 		txTitle.size = 16;
@@ -47,7 +52,24 @@ class HomeScreen extends BaseScreen{
 		
 		txCredits.text = "Created in 48 hours for Ludum Dare 40 by @AlexRamallo";
 		txCredits.size = 12;
-		txCredits.color = 0xFF4800;		
+		txCredits.color = 0xFF4800;	
+		
+		txStuntsInfo.text = "Your Recent Stunts";
+		txStuntsInfo.size = 12;
+		txStuntsInfo.color = 0xFF4800;	
+		
+		txStunts = [];
+		for(i in 0...prog.data.memory){
+			var st = prog.data.stunt_history[(prog.data.stunt_history.length - 1) - i];
+			txStunts[i] = new FlxText();
+			if(st!=null)
+				txStunts[i].text = "- "+st.getName();
+			else
+				txStunts[i].text = "- <nothing>";
+			txStunts[i].size = 10;
+			txStunts[i].color = 0xFF4800;
+			add(txStunts[i]);
+		}
 		
 		btnPastStunts = new FlxButton();
 
@@ -92,6 +114,7 @@ class HomeScreen extends BaseScreen{
 		add(txTitle);
 		add(txInstruct);
 		add(txCredits);
+		add(txStuntsInfo);
 		add(btnNewStunt);
 		add(btnPastStunts);
 		add(btnAdNetworks);
@@ -113,6 +136,21 @@ class HomeScreen extends BaseScreen{
 		txCredits.fieldWidth = 550;
 		txCredits.alignment = CENTER;
 		txCredits.autoSize = false;
+
+		txStuntsInfo.x = banner.x + 200;
+		txStuntsInfo.y = banner.y + 190;
+		txStuntsInfo.fieldWidth = 360;
+		txStuntsInfo.alignment = CENTER;
+		txStuntsInfo.autoSize = false;
+		
+		var sep = 25;
+		for(i in 0...prog.data.memory){
+			txStunts[i].autoSize = false;
+			txStunts[i].fieldWidth = 360;
+			txStunts[i].alignment = LEFT;
+			txStunts[i].x = txStuntsInfo.x;
+			txStunts[i].y = txStuntsInfo.y + 20 + (sep * i);
+		}
 		
 		btnNewStunt.x = banner.x + 10;
 		btnNewStunt.y = banner.y + 210;
@@ -138,13 +176,20 @@ class HomeScreen extends BaseScreen{
 		remove(txTitle);
 		remove(txInstruct);
 		remove(txCredits);
+		remove(txStuntsInfo);
 		remove(btnNewStunt);
 		remove(btnPastStunts);
 		remove(btnAdNetworks);
+		
+		for(i in 0...prog.data.memory){
+			remove(txStunts[i]);
+			FlxDestroyUtil.destroy(txStunts[i]);
+		}
 					
 		FlxDestroyUtil.destroy(txTitle);
 		FlxDestroyUtil.destroy(txInstruct);
 		FlxDestroyUtil.destroy(txCredits);
+		FlxDestroyUtil.destroy(txStuntsInfo);
 		FlxDestroyUtil.destroy(btnNewStunt);
 		FlxDestroyUtil.destroy(btnPastStunts);
 		FlxDestroyUtil.destroy(btnAdNetworks);

@@ -6,9 +6,6 @@ package;
  */
 class Stunt 
 {
-	public var risk:Float;
-	public var danger:Int;
-	public var stupidity:Int;
 	
 	public var result_accident:Bool = false;
 	public var result_followers:Int = 0;

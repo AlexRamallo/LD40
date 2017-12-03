@@ -21,6 +21,7 @@ class PlayState extends FlxState
 		if(prog == null)
 			prog = new PCProgram();
 		prog.view = view;
+		prog.data.view = view;
 		prog.anchor = view.anchor_scr;
 		
 		view.prog = prog;		
