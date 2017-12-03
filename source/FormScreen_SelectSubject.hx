@@ -14,6 +14,7 @@ class FormScreen_SelectSubject extends BaseScreen{
 	
 	public var txTitle:FlxText;
 	public var txInstruct:FlxText;
+	public var txSelected:FlxText;
 	
 	public var statsBg:FlxSprite;
 	public var statsTxt:Array<FlxText> = [];
@@ -36,6 +37,7 @@ class FormScreen_SelectSubject extends BaseScreen{
 		statsBg.loadGraphic(AssetPaths.stats__png, false, 370, 70);
 		txTitle = new FlxText();
 		txInstruct = new FlxText();
+		txSelected = new FlxText();
 		
 		txTitle.text = "Select Subject for \""+selectedAct.name+"\"";
 		txTitle.size = 16;
@@ -44,6 +46,11 @@ class FormScreen_SelectSubject extends BaseScreen{
 		txInstruct.text = "choose the subject that you wish to perform the act on";
 		txInstruct.size = 12;
 		txInstruct.color = 0xFFFFFF;
+		
+		txSelected.text = "select an act for more details";
+		txSelected.size = 12;
+		txSelected.color = 0xFF4800;
+		txSelected.autoSize = false;
 		
 		statsTxt = [
 			new FlxText(),
@@ -79,7 +86,7 @@ class FormScreen_SelectSubject extends BaseScreen{
 		add(txTitle);
 		add(txInstruct);		
 		add(statsBg);
-		
+		add(txSelected);		
 		add(btnNext);
 		add(btnBack);
 		
@@ -115,6 +122,7 @@ class FormScreen_SelectSubject extends BaseScreen{
 			var sel = subjects[idx];
 			prog.shared.set("formsel_Subject", sel);
 			
+			txSelected.text = sel.name;
 			statsTxt[0].text = "Risk:\n\n" + Math.round(sel.delta_risk) + "%";
 			statsTxt[1].text = "Danger:\n\n" + sel.delta_danger;
 			statsTxt[2].text = "Stupidity:\n\n" + sel.delta_stupidity + "/10";
@@ -147,6 +155,11 @@ class FormScreen_SelectSubject extends BaseScreen{
 		
 		btnNext.x = statsBg.x + statsBg.width + 10;
 		btnNext.y = statsBg.y + 35;
+		
+		txSelected.x = statsBg.x;
+		txSelected.y = statsBg.y - 20;
+		txSelected.fieldWidth = statsBg.width;
+		txSelected.alignment = FlxTextAlign.CENTER;
 		
 		
 		var subjects = selectedAct.subjects;
@@ -183,10 +196,7 @@ class FormScreen_SelectSubject extends BaseScreen{
 			return;
 		}else{
 			var str = selectedAct.name + " " + sel.name;
-			prog.confirm("Are you sure?", 'You\'ve chosen the stunt:\n\n$str',
-			function(){
-				prog.openScreen(new NewStuntScreen(prog));
-			});
+			prog.openScreen(new NewStuntScreen(prog));
 		}
 	}
 	
@@ -214,6 +224,7 @@ class FormScreen_SelectSubject extends BaseScreen{
 		
 		remove(txTitle);
 		remove(txInstruct);
+		remove(txSelected);
 		remove(statsBg);
 		remove(btnNext);
 		remove(btnBack);
@@ -230,6 +241,7 @@ class FormScreen_SelectSubject extends BaseScreen{
 			
 		FlxDestroyUtil.destroy(txTitle);
 		FlxDestroyUtil.destroy(txInstruct);
+		FlxDestroyUtil.destroy(txSelected);
 		FlxDestroyUtil.destroy(statsBg);
 		FlxDestroyUtil.destroy(btnNext);
 		FlxDestroyUtil.destroy(btnBack);

@@ -139,7 +139,7 @@ class StuntResultsScreen extends BaseScreen{
 		txStuntRes_damage = new FlxText();
 		txStuntRes_accident= new FlxText();
 		
-		txStuntName.color 			= 0xFF4800;
+		txStuntName.color 			= 0xFFFFFF;
 		txStuntComments.color 		= 0xFF4800;
 		txStuntRes.color 			= 0xFF4800;
 		txStuntRes_followers.color 	= 0xFF4800;
@@ -211,6 +211,8 @@ class StuntResultsScreen extends BaseScreen{
 	}
 	
 	override public function onOpen():Void {
+		show_banner2 = true;
+		banner2_offset = 62;
 		super.onOpen();
 		
 		activeStunt = prog.shared.get("form_results_active_stunt");

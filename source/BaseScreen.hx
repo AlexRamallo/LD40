@@ -48,7 +48,7 @@ class BaseScreen extends LaptopScreen
 		
 		banner_avatar = prog.data.avatar;//new UserAvatar();
 		
-		btnHome = new FlxButton(0, 0, "HOME MENU", prog.goHome);
+		btnHome = new FlxButton(0, 0, "RETURN HOME", prog.goHome);
 		btnHome.scrollFactor.x = 1;
 		btnHome.scrollFactor.y = 1;
 		

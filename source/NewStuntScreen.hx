@@ -86,9 +86,9 @@ import flixel.group.FlxGroup;
 	 
 	 public function str():String{
 		 if (pair == null)
-			return "<nothing>";
+			return 'ACT ${offset+1}: <nothing>';
 			
-		 return pair.act.name + " " + pair.sub.name;
+		 return 'ACT ${offset+1}: ' + pair.act.name + " " + pair.sub.name;
 	 }
 	 
 	 public function onDestroyMe(){
@@ -116,11 +116,11 @@ class NewStuntScreen extends BaseScreen{
 		txInstruct = new FlxText();
 		btnSubmit = new FlxButton(0, 0, "SUBMIT", onSubmit);
 		
-		txTitle.text = "PERFORM NEW STUNT";
+		txTitle.text = "DESCRIBE YOUR STUNT";
 		txTitle.size = 24;
 		txTitle.color = 0xFFFFFF;
 		
-		txInstruct.text = "Add acts to your stunt below, and press the submit button when you're finished";
+		txInstruct.text = "Use \"ACTS\" to describe your stunt below.\nHit submit when you're done";
 		txInstruct.size = 12;
 		txInstruct.color = 0xFFFFFF;
 		
@@ -156,7 +156,7 @@ class NewStuntScreen extends BaseScreen{
 		
 		txInstruct.x = txTitle.x;
 		txInstruct.y = txTitle.y + 30;
-		txInstruct.fieldWidth = 300;
+		txInstruct.fieldWidth = 450;
 		
 		var root = new FlxPoint(banner.x + 20, txInstruct.y + 100);
 		for(w in actWidgets){
@@ -213,10 +213,10 @@ class NewStuntScreen extends BaseScreen{
 		];
 		var eidx = Math.round(rating * (encouragement.length-1));
 		var msg = encouragement[eidx];
-		prog.alert(msg);
 		prog.data.submitStunt(stunt);
 		prog.shared.set("form_results_active_stunt", stunt);
 		prog.openScreen(new StuntResultsScreen(prog));
+		prog.alert(msg);
 	}
 	
 	private function loadStagedStunts(){

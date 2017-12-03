@@ -2,12 +2,15 @@ package;
 import flixel.math.FlxPoint;
 import flixel.ui.FlxButton;
 import flixel.util.FlxDestroyUtil;
+import flixel.text.FlxText;
 
 /**
  * ...
  * @author Alejandro Ramallo
  */
 class HomeScreen extends BaseScreen{
+	public var txTitle:FlxText;
+	public var txInstruct:FlxText;
 	
 	public var btnNewStunt:FlxButton;
 	public var btnPastStunts:FlxButton;
@@ -22,6 +25,19 @@ class HomeScreen extends BaseScreen{
 		btnNewStunt = new FlxButton(0, 0, "", function(){
 			prog.openScreen(new NewStuntScreen(prog));
 		});
+		
+		txTitle = new FlxText();
+		txInstruct = new FlxText();
+		
+		txTitle.text = "Welcome to coolstunts.geocities.com!";
+		txTitle.size = 16;
+		txTitle.color = 0xFFFFFF;
+		
+		txInstruct.text = "Post your stunts and try to get the most followers\n(just try to not get yourself killed)";
+		txInstruct.size = 12;
+		txInstruct.color = 0xFFFFFF;		
+		txInstruct.fieldWidth = 450;
+		
 		btnPastStunts = new FlxButton();
 		btnAdNetworks = new FlxButton();
 		
@@ -62,7 +78,9 @@ class HomeScreen extends BaseScreen{
 		btnAdNetworks.label.fieldWidth *= 2;
 		btnAdNetworks.label.size = 14;		
 		btnAdNetworks.labelOffsets = defoff;
-		
+				
+		add(txTitle);
+		add(txInstruct);
 		add(btnNewStunt);
 		add(btnPastStunts);
 		add(btnAdNetworks);
@@ -70,9 +88,16 @@ class HomeScreen extends BaseScreen{
 	
 	override public function setPos(x:Int, y:Int) {
 		super.setPos(x, y);
+				
+		txTitle.x = banner.x + 30;
+		txTitle.y = banner.y + 110;
+		
+		txInstruct.x = txTitle.x;
+		txInstruct.y = txTitle.y + 30;
+		
 		
 		btnNewStunt.x = banner.x + 10;
-		btnNewStunt.y = banner.y + 110;
+		btnNewStunt.y = banner.y + 210;
 		
 		btnPastStunts.x = btnNewStunt.x;
 		btnPastStunts.y = btnNewStunt.y + 50;
@@ -82,17 +107,24 @@ class HomeScreen extends BaseScreen{
 	}
 	
 	override public function onOpen():Void {
+		show_banner2 = true;
+		banner2_offset = 20;
+		
 		super.onOpen();
 		initHome();
 	}
 	
 	override public function onClose():Void {
 		super.onClose();
-		
+				
+		remove(txTitle);
+		remove(txInstruct);
 		remove(btnNewStunt);
 		remove(btnPastStunts);
 		remove(btnAdNetworks);
-		
+					
+		FlxDestroyUtil.destroy(txTitle);
+		FlxDestroyUtil.destroy(txInstruct);
 		FlxDestroyUtil.destroy(btnNewStunt);
 		FlxDestroyUtil.destroy(btnPastStunts);
 		FlxDestroyUtil.destroy(btnAdNetworks);
