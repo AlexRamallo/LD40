@@ -132,6 +132,12 @@ class PlayData
 			view.died();
 			prog.died();
 			prog.alert("You're dead :'(", "Guess what?");
+		}else{
+			prog.alert(
+				"new followers: " + stunt.result_followers + "\n"
+				+"health loss: "+stunt.result_damage+"\n",
+				"Results"
+			);
 		}
 	}
 	

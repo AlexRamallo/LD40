@@ -16,7 +16,6 @@ class PCProgram {
 	public var popup:PopupConfirm;
 	public var home:LaptopScreen;
 	public var screens:Array<LaptopScreen>;
-	public var active:LaptopScreen;
 
 	public var anchor = {
 		x: 0,
@@ -77,6 +76,8 @@ class PCProgram {
 	}
 	
 	public function step(elapsed){
+		var active = screens[screens.length - 1];
+
 		if(active!=null)
 			active.onStep(elapsed);
 	}
