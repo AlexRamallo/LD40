@@ -213,6 +213,8 @@ class NewStuntScreen extends BaseScreen{
 		var msg = encouragement[eidx];
 		prog.alert(msg);
 		prog.data.submitStunt(stunt);
+		prog.shared.set("form_results_active_stunt", stunt);
+		prog.openScreen(new StuntResultsScreen(prog));
 	}
 	
 	private function loadStagedStunts(){

@@ -3,6 +3,7 @@ import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxDestroyUtil;
+import flixel.ui.FlxButton;
 import UserAvatar;
 
 /**
@@ -12,6 +13,8 @@ import UserAvatar;
 class BaseScreen extends LaptopScreen
 {
 	public var prog:PCProgram;
+	
+	public var btnHome:FlxButton;
 	
 	public var banner:FlxSprite;
 	public var banner_avatar:UserAvatar;
@@ -33,6 +36,10 @@ class BaseScreen extends LaptopScreen
 		
 		banner_avatar = prog.data.avatar;//new UserAvatar();
 		
+		btnHome = new FlxButton(0, 0, "HOME MENU", prog.goHome);
+		btnHome.scrollFactor.x = 1;
+		btnHome.scrollFactor.y = 1;
+		
 		banner_name = new FlxText();
 		banner_health = new FlxText();
 		banner_followers = new FlxText();
@@ -49,6 +56,7 @@ class BaseScreen extends LaptopScreen
 		add(banner_health);
 		add(banner_followers);
 		add(banner_money);
+		add(btnHome);
 	}
 	override public function setPos(x:Int, y:Int){
 		banner.x = x;
@@ -59,6 +67,9 @@ class BaseScreen extends LaptopScreen
 		
 		banner_name.x = banner.x + 100;
 		banner_name.y = banner.y + 10;
+		
+		btnHome.x = banner_name.x;
+		btnHome.y = banner_name.y + 20;
 		
 		banner_health.x = banner.x + 100;
 		banner_health.y = banner.y + 60;
@@ -87,7 +98,9 @@ class BaseScreen extends LaptopScreen
 		remove(banner_name);
 		remove(banner_followers);
 		remove(banner_money);
+		remove(btnHome);
 		
+		FlxDestroyUtil.destroy(btnHome);
 		FlxDestroyUtil.destroy(banner);
 		FlxDestroyUtil.destroy(banner_name);
 		FlxDestroyUtil.destroy(banner_followers);

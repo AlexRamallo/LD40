@@ -41,4 +41,17 @@ class Stunt
 			ret += a.act.stupidity + a.sub.delta_stupidity;
 		return ret;
 	}
+	
+	public function getName():String{
+		var ret:String = "";
+		var first:Bool = true;
+		for (p in pairs){
+			if(!first){
+				ret += " while ";
+				first = false;
+			}
+			ret += p.act.name + " " + p.sub.name;
+		}
+		return ret;
+	}
 }
