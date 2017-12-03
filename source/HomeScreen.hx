@@ -28,6 +28,10 @@ class HomeScreen extends BaseScreen{
 			prog.openScreen(new NewStuntScreen(prog));
 		});
 		
+		btnAdNetworks = new FlxButton(0, 0, "", function(){
+			prog.openScreen(new SellDataScreen(prog));
+		});
+		
 		txTitle = new FlxText();
 		txInstruct = new FlxText();
 		txCredits = new FlxText();
@@ -46,8 +50,7 @@ class HomeScreen extends BaseScreen{
 		txCredits.color = 0xFF4800;		
 		
 		btnPastStunts = new FlxButton();
-		btnAdNetworks = new FlxButton();
-		
+
 		btnNewStunt.scrollFactor.x = 1;
 		btnNewStunt.scrollFactor.y = 1;
 		

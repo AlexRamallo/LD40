@@ -14,6 +14,8 @@ class PCProgram {
 	
 	public var shared:StringMap<Dynamic>;
 	
+	public var view:GameView;
+	
 	public var trans:FlxSprite;
 	private var transitionEffectActive:Bool = true;
 	private var transitionPopupGuard:Int = 0;
@@ -28,7 +30,8 @@ class PCProgram {
 		y: 0
 	};
 
-	public function new() {
+	public function new(v:GameView) {
+		view = v;
 		screens = [];
 		shared = new StringMap<Dynamic>();
 		data = new PlayData(this);

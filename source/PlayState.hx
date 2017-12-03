@@ -15,7 +15,7 @@ class PlayState extends FlxState
 		view = new GameView();		
 		add(view.bg);
 		
-		prog = new PCProgram();
+		prog = new PCProgram(view);
 		prog.anchor = view.anchor_scr;
 		prog.boot();
 		
