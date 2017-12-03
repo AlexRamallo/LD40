@@ -40,4 +40,8 @@ class GameView
 		FlxG.camera.scroll.y = anchor_pc.y;
 	}
 	
+	public function died(){
+		//Switch to game over scene
+	}
+	
 }

@@ -3,6 +3,7 @@ import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxDestroyUtil;
+import UserAvatar;
 
 /**
  * ...
@@ -13,7 +14,7 @@ class BaseScreen extends LaptopScreen
 	public var prog:PCProgram;
 	
 	public var banner:FlxSprite;
-	public var banner_avatar:FlxSprite;
+	public var banner_avatar:UserAvatar;
 	
 	public var banner_name:FlxText;
 	public var banner_health:FlxText;
@@ -30,8 +31,7 @@ class BaseScreen extends LaptopScreen
 		banner.loadGraphic(AssetPaths.banner__png, false, 570, 100);
 		banner.pixelPerfectRender = true;
 		
-		banner_avatar = new FlxSprite();
-		banner_avatar.loadGraphic(AssetPaths.avatar__png, false, 70, 70);
+		banner_avatar = prog.data.avatar;//new UserAvatar();
 		
 		banner_name = new FlxText();
 		banner_health = new FlxText();
@@ -89,7 +89,6 @@ class BaseScreen extends LaptopScreen
 		remove(banner_money);
 		
 		FlxDestroyUtil.destroy(banner);
-		FlxDestroyUtil.destroy(banner_avatar);
 		FlxDestroyUtil.destroy(banner_name);
 		FlxDestroyUtil.destroy(banner_followers);
 		FlxDestroyUtil.destroy(banner_money);

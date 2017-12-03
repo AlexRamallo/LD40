@@ -27,7 +27,7 @@ class PCProgram {
 		screens = [];
 		shared = new StringMap<Dynamic>();
 		home = new HomeScreen(this);
-		data = new PlayData();
+		data = new PlayData(this);
 		popup = new PopupConfirm("", "", null);
 		popup.init();
 	}
@@ -104,5 +104,9 @@ class PCProgram {
 			pt.x = FlxG.camera.x + 555;
 			pt.y = FlxG.camera.y + 350;
 			popup.show(pt);
+	}
+	
+	public function died(){
+		//handle death
 	}
 }

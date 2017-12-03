@@ -72,6 +72,32 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		Font.registerFont (__ASSET__flixel_fonts_nokiafc22_ttf);
 		Font.registerFont (__ASSET__flixel_fonts_monsterrat_ttf);
 		
@@ -81,6 +107,32 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -612,6 +664,32 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf);
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_monsterrat_ttf);
 		
@@ -625,10 +703,62 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/data/data-goes-here.txt", AssetType.TEXT);
 		path.set ("assets/images/avatar.png", "assets/images/avatar.png");
 		type.set ("assets/images/avatar.png", AssetType.IMAGE);
+		path.set ("assets/images/avatars/bg1.png", "assets/images/avatars/bg1.png");
+		type.set ("assets/images/avatars/bg1.png", AssetType.IMAGE);
+		path.set ("assets/images/avatars/bg10.png", "assets/images/avatars/bg10.png");
+		type.set ("assets/images/avatars/bg10.png", AssetType.IMAGE);
+		path.set ("assets/images/avatars/bg2.png", "assets/images/avatars/bg2.png");
+		type.set ("assets/images/avatars/bg2.png", AssetType.IMAGE);
+		path.set ("assets/images/avatars/bg3.png", "assets/images/avatars/bg3.png");
+		type.set ("assets/images/avatars/bg3.png", AssetType.IMAGE);
+		path.set ("assets/images/avatars/bg4.png", "assets/images/avatars/bg4.png");
+		type.set ("assets/images/avatars/bg4.png", AssetType.IMAGE);
+		path.set ("assets/images/avatars/bg5.png", "assets/images/avatars/bg5.png");
+		type.set ("assets/images/avatars/bg5.png", AssetType.IMAGE);
+		path.set ("assets/images/avatars/bg6.png", "assets/images/avatars/bg6.png");
+		type.set ("assets/images/avatars/bg6.png", AssetType.IMAGE);
+		path.set ("assets/images/avatars/bg7.png", "assets/images/avatars/bg7.png");
+		type.set ("assets/images/avatars/bg7.png", AssetType.IMAGE);
+		path.set ("assets/images/avatars/bg8.png", "assets/images/avatars/bg8.png");
+		type.set ("assets/images/avatars/bg8.png", AssetType.IMAGE);
+		path.set ("assets/images/avatars/bg9.png", "assets/images/avatars/bg9.png");
+		type.set ("assets/images/avatars/bg9.png", AssetType.IMAGE);
+		path.set ("assets/images/avatars/fg1.png", "assets/images/avatars/fg1.png");
+		type.set ("assets/images/avatars/fg1.png", AssetType.IMAGE);
+		path.set ("assets/images/avatars/fg10.png", "assets/images/avatars/fg10.png");
+		type.set ("assets/images/avatars/fg10.png", AssetType.IMAGE);
+		path.set ("assets/images/avatars/fg2.png", "assets/images/avatars/fg2.png");
+		type.set ("assets/images/avatars/fg2.png", AssetType.IMAGE);
+		path.set ("assets/images/avatars/fg3.png", "assets/images/avatars/fg3.png");
+		type.set ("assets/images/avatars/fg3.png", AssetType.IMAGE);
+		path.set ("assets/images/avatars/fg4.png", "assets/images/avatars/fg4.png");
+		type.set ("assets/images/avatars/fg4.png", AssetType.IMAGE);
+		path.set ("assets/images/avatars/fg5.png", "assets/images/avatars/fg5.png");
+		type.set ("assets/images/avatars/fg5.png", AssetType.IMAGE);
+		path.set ("assets/images/avatars/fg6.png", "assets/images/avatars/fg6.png");
+		type.set ("assets/images/avatars/fg6.png", AssetType.IMAGE);
+		path.set ("assets/images/avatars/fg7.png", "assets/images/avatars/fg7.png");
+		type.set ("assets/images/avatars/fg7.png", AssetType.IMAGE);
+		path.set ("assets/images/avatars/fg8.png", "assets/images/avatars/fg8.png");
+		type.set ("assets/images/avatars/fg8.png", AssetType.IMAGE);
+		path.set ("assets/images/avatars/fg9.png", "assets/images/avatars/fg9.png");
+		type.set ("assets/images/avatars/fg9.png", AssetType.IMAGE);
+		path.set ("assets/images/avatars/fr1.png", "assets/images/avatars/fr1.png");
+		type.set ("assets/images/avatars/fr1.png", AssetType.IMAGE);
+		path.set ("assets/images/avatars/fr2.png", "assets/images/avatars/fr2.png");
+		type.set ("assets/images/avatars/fr2.png", AssetType.IMAGE);
+		path.set ("assets/images/avatars/fr3.png", "assets/images/avatars/fr3.png");
+		type.set ("assets/images/avatars/fr3.png", AssetType.IMAGE);
+		path.set ("assets/images/avatars/fr4.png", "assets/images/avatars/fr4.png");
+		type.set ("assets/images/avatars/fr4.png", AssetType.IMAGE);
+		path.set ("assets/images/avatars/fr5.png", "assets/images/avatars/fr5.png");
+		type.set ("assets/images/avatars/fr5.png", AssetType.IMAGE);
+		path.set ("assets/images/avatars/fr6.png", "assets/images/avatars/fr6.png");
+		type.set ("assets/images/avatars/fr6.png", AssetType.IMAGE);
 		path.set ("assets/images/banner.png", "assets/images/banner.png");
 		type.set ("assets/images/banner.png", AssetType.IMAGE);
-		path.set ("assets/images/bg1.png", "assets/images/bg1.png");
-		type.set ("assets/images/bg1.png", AssetType.IMAGE);
+		path.set ("assets/images/bg_test.png", "assets/images/bg_test.png");
+		type.set ("assets/images/bg_test.png", AssetType.IMAGE);
 		path.set ("assets/images/desk.png", "assets/images/desk.png");
 		type.set ("assets/images/desk.png", AssetType.IMAGE);
 		path.set ("assets/images/graveyard.png", "assets/images/graveyard.png");
@@ -672,10 +802,88 @@ class DefaultAssetLibrary extends AssetLibrary {
 		id = "assets/images/avatar.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
+		id = "assets/images/avatars/bg1.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/avatars/bg10.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/avatars/bg2.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/avatars/bg3.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/avatars/bg4.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/avatars/bg5.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/avatars/bg6.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/avatars/bg7.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/avatars/bg8.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/avatars/bg9.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/avatars/fg1.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/avatars/fg10.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/avatars/fg2.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/avatars/fg3.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/avatars/fg4.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/avatars/fg5.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/avatars/fg6.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/avatars/fg7.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/avatars/fg8.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/avatars/fg9.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/avatars/fr1.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/avatars/fr2.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/avatars/fr3.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/avatars/fr4.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/avatars/fr5.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/avatars/fr6.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
 		id = "assets/images/banner.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
-		id = "assets/images/bg1.png";
+		id = "assets/images/bg_test.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
 		id = "assets/images/desk.png";
@@ -749,6 +957,32 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -1513,6 +1747,32 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_beep_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_flixel_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_fonts_nokiafc22_ttf extends null { }
@@ -1522,6 +1782,32 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 #elseif html5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

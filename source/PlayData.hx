@@ -8,7 +8,11 @@ import Stunt_Subject;
  */
 class PlayData 
 {
+	public var prog:PCProgram;
+	public var view:GameView;
+	
 	public var name:String = "Kenny Rogers";
+	public var avatar:UserAvatar = null;
 	
 	public var health:Int = 100;
 	public var followers:Int = 0;
@@ -27,9 +31,11 @@ class PlayData
 	public var prev_risk:Array<Float> = [];
 	public var prev_danger:Array<Int> = [];
 
-	public function new() 
+	public function new(p) 
 	{
-		
+		prog = p;
+		avatar = new UserAvatar();
+		avatar.initRandom();
 	}
 	
 	public function submitStunt(stunt:Stunt){
@@ -98,8 +104,8 @@ class PlayData
 		}
 		
 		//Followers gained from the stunt
-		var followers_from_stunt = (15000 * (danger / 100));
-		var followers_from_outcome = (5000 / (1 - risk)) / (accident?2:1);
+		var followers_from_stunt = net_danger>=0?(15000 * (danger / 100)):0;
+		var followers_from_outcome = net_risk>=0?((5000 / (1 - risk)) / (accident?2:1)):0;
 		
 		var loss_from_boredom = 0;
 		if(net_risk <= 0 && net_danger <= 0){
@@ -113,6 +119,20 @@ class PlayData
 		stunt.result_accident = accident;
 		stunt.result_followers = Std.int(followers_from_stunt + followers_from_outcome + stupidity_bonus - loss_from_boredom);
 		stunt.result_damage = damage;
+		
+		giveRewards(stunt);
+	}
+	
+	public function giveRewards(stunt:Stunt){
+		followers += stunt.result_followers;
+		follower_data += stunt.result_followers;
+		health -= stunt.result_damage;
+		
+		if(health <= 0){
+			view.died();
+			prog.died();
+			prog.alert("You're dead :'(", "Guess what?");
+		}
 	}
 	
 	//TODO: hardcode act data in here

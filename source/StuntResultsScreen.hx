@@ -2,15 +2,31 @@ package ;
 import flixel.math.FlxPoint;
 import flixel.ui.FlxButton;
 import flixel.util.FlxDestroyUtil;
+import flixel.group.FlxGroup;
+import flixel.FlxSprite;
 /**
  * ...
  * @author ...
  */
+
+ class UserCommentWidget extends FlxGroup{
+	 public var avatar:FlxSprite;
+	 public var name:String;
+	 public var msg:String;
+	 public var followed:Bool;
+	 
+	 public function new(){
+		super();
+	 }
+	 
+	 public function init(){
+		
+	 }
+ }
+ 
 class StuntResultsScreen extends BaseScreen{
 	
-	public var btnNewStunt:FlxButton;
-	public var btnPastStunts:FlxButton;
-	public var btnAdNetworks:FlxButton;
+	public var activeStunt:Stunt;
 	
 	public function new(p) 
 	{
@@ -18,53 +34,7 @@ class StuntResultsScreen extends BaseScreen{
 	}
 	
 	private function initUI(){
-		btnNewStunt = new FlxButton(0, 0, "", function(){
-			prog.openScreen(new NewStuntScreen(prog));
-		});
-		btnPastStunts = new FlxButton();
-		btnAdNetworks = new FlxButton();
-		
-		btnNewStunt.scrollFactor.x = 1;
-		btnNewStunt.scrollFactor.y = 1;
-		
-		btnPastStunts.scrollFactor.x = 1;
-		btnPastStunts.scrollFactor.y = 1;
-		
-		btnAdNetworks.scrollFactor.x = 1;
-		btnAdNetworks.scrollFactor.y = 1;
-		
-		btnNewStunt.scale.x = btnNewStunt.scale.y = 2;
-		btnPastStunts.scale.x = btnPastStunts.scale.y = 2;
-		btnAdNetworks.scale.x = btnAdNetworks.scale.y = 2;
-		
-		btnNewStunt.text = "NEW STUNT";
-		btnPastStunts.text = "PAST STUNTS";
-		btnAdNetworks.text = "SELL DATA";
-		
-		var defoff = [
-			new FlxPoint(0, 10),
-			new FlxPoint(0, 10),
-			new FlxPoint(0, 10)
-		];
-		
-		btnNewStunt.updateHitbox();
-		btnNewStunt.label.fieldWidth *= 2;
-		btnNewStunt.label.size = 14;
-		btnNewStunt.labelOffsets = defoff;
-		
-		btnPastStunts.updateHitbox();
-		btnPastStunts.label.fieldWidth *= 2;
-		btnPastStunts.label.size = 14;
-		btnPastStunts.labelOffsets = defoff;
-		
-		btnAdNetworks.updateHitbox();
-		btnAdNetworks.label.fieldWidth *= 2;
-		btnAdNetworks.label.size = 14;		
-		btnAdNetworks.labelOffsets = defoff;
-		
-		add(btnNewStunt);
-		add(btnPastStunts);
-		add(btnAdNetworks);
+			
 	}
 	
 	override public function setPos(x:Int, y:Int) {
@@ -82,7 +52,14 @@ class StuntResultsScreen extends BaseScreen{
 	
 	override public function onOpen():Void {
 		super.onOpen();
-		initHome();
+		
+		activeStunt = prog.shared.get("form_results_active_stunt");
+		if (aStunt == null){
+			prog.goBack();
+			return;
+		}	
+		
+		initUI();
 	}
 	
 	override public function onClose():Void {
