@@ -38,7 +38,7 @@ class PlayData
 	
 	public var memory:Int = 5; //memory of your viewers
 	
-	public var money:Int = 0;
+	public var money:Int = 200000;
 	
 	public var stunt_history:Array<Stunt> = [];
 	
@@ -283,7 +283,9 @@ class PlayData
 		followers += stunt.result_followers;
 		follower_data += stunt.result_followers;
 		health -= stunt.result_damage;
-		
+		if(stunt.result_damage!=0){
+			FlxG.sound.playMusic(AssetPaths.injured__wav, 1, false);
+		}
 		if(health <= 0){
 			view.died();
 			prog.died();

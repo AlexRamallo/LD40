@@ -5,11 +5,7 @@ import flixel.ui.FlxButton;
 import flixel.util.FlxDestroyUtil;
 import flixel.text.FlxText;
 import flixel.group.FlxGroup;
-
-/**
- * ...
- * @author ...
- */
+import flixel.FlxG;
 
 class MerchantWidget extends FlxGroup{
 	public var prog:PCProgram;
@@ -150,6 +146,7 @@ class MerchantWidget extends FlxGroup{
 				prog.data.follower_data -= amount;
 				prog.data.money += total;
 				prog.alert("Sale Complete");
+				FlxG.sound.playMusic(AssetPaths.sold_data__wav, 1, false);
 			}
 		);
 	}

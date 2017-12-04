@@ -93,10 +93,10 @@ class NameGenerator {
 		for (i in 0...ret.length){
 			var c = ret.charAt(i);
 			var sw:String = l337swaps.get(c);
-			if (sw != null && Math.random() < 0.5)
-				nn += Math.random()<0.7?sw:sw.toUpperCase();
+			if (sw != null && Math.random() < 0.2)
+				nn += Math.random()<0.9?sw:sw.toUpperCase();
 			else
-				nn += Math.random()<0.7?c:c.toUpperCase();
+				nn += Math.random()<0.9?c:c.toUpperCase();
 		}
 		ret = nn;
 		

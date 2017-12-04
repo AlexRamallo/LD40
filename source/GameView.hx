@@ -91,6 +91,7 @@ class GameView
 	
 	public function died(){
 		//Handle death
+		FlxG.switchState(new DeathState());
 	}
 	
 	public function initPainkiller(){

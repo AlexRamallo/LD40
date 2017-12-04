@@ -104,8 +104,16 @@ class AssetData {
 			type.set ("assets/images/thumbs_14x14.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/transition.png", "assets/images/transition.png");
 			type.set ("assets/images/transition.png", Reflect.field (AssetType, "image".toUpperCase ()));
-			path.set ("assets/music/music-goes-here.txt", "assets/music/music-goes-here.txt");
-			type.set ("assets/music/music-goes-here.txt", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/music/go_back.wav", "assets/music/go_back.wav");
+			type.set ("assets/music/go_back.wav", Reflect.field (AssetType, "sound".toUpperCase ()));
+			path.set ("assets/music/go_home.wav", "assets/music/go_home.wav");
+			type.set ("assets/music/go_home.wav", Reflect.field (AssetType, "sound".toUpperCase ()));
+			path.set ("assets/music/injured.wav", "assets/music/injured.wav");
+			type.set ("assets/music/injured.wav", Reflect.field (AssetType, "sound".toUpperCase ()));
+			path.set ("assets/music/open_page.wav", "assets/music/open_page.wav");
+			type.set ("assets/music/open_page.wav", Reflect.field (AssetType, "sound".toUpperCase ()));
+			path.set ("assets/music/sold_data.wav", "assets/music/sold_data.wav");
+			type.set ("assets/music/sold_data.wav", Reflect.field (AssetType, "sound".toUpperCase ()));
 			path.set ("assets/sounds/sounds-go-here.txt", "assets/sounds/sounds-go-here.txt");
 			type.set ("assets/sounds/sounds-go-here.txt", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("flixel/sounds/beep.ogg", "flixel/sounds/beep.ogg");

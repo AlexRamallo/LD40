@@ -71,6 +71,7 @@ class PCProgram {
 	}
 	
 	public function openScreen(scr:LaptopScreen){
+		FlxG.sound.playMusic(AssetPaths.open_page__wav, 1, false);
 		var cur = screens[screens.length - 1];
 		if(cur != null)
 			cur.onClose();
@@ -96,6 +97,7 @@ class PCProgram {
 	}
 	
 	public function goBack(){
+		FlxG.sound.playMusic(AssetPaths.go_back__wav, 1, false);
 		var cur = screens.pop();
 		if(cur != null)
 			cur.onClose();
@@ -105,6 +107,7 @@ class PCProgram {
 	}
 	
 	public function goHome(){
+		FlxG.sound.playMusic(AssetPaths.go_home__wav, 1, false);
 		for (s in screens){
 			s.onClose();
 			screens.remove(s);
