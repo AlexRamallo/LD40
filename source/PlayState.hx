@@ -29,7 +29,7 @@ class PlayState extends FlxState
 		
 		view.loadBg();
 		prog.boot();
-		view.showRoom();
+		view.showPC();
 	}
 
 	override public function update(elapsed:Float):Void

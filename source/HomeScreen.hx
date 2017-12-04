@@ -37,7 +37,7 @@ class HomeScreen extends BaseScreen{
 		});
 		
 		btnPastStunts = new FlxButton(0, 0, "", function(){
-			prog.alert("higher risk and danger = more followers.\nRepeating past stunts reduces payout.\nRepeating recent stunts = penalty.");
+			prog.alert("higher risk and danger gives higher reward. Don't repeat stunts.\n\nPress SPACE to access meds and hospital");
 		});
 		
 		txTitle = new FlxText();
