@@ -36,6 +36,10 @@ class HomeScreen extends BaseScreen{
 			prog.openScreen(new SellDataScreen(prog));
 		});
 		
+		btnPastStunts = new FlxButton(0, 0, "", function(){
+			prog.alert("higher risk and danger = more followers.\nRepeating past stunts reduces payout.\nRepeating recent stunts = penalty.");
+		});
+		
 		txTitle = new FlxText();
 		txInstruct = new FlxText();
 		txCredits = new FlxText();
@@ -70,8 +74,6 @@ class HomeScreen extends BaseScreen{
 			txStunts[i].color = 0xFF4800;
 			add(txStunts[i]);
 		}
-		
-		btnPastStunts = new FlxButton();
 
 		btnNewStunt.scrollFactor.x = 1;
 		btnNewStunt.scrollFactor.y = 1;
@@ -87,7 +89,7 @@ class HomeScreen extends BaseScreen{
 		btnAdNetworks.scale.x = btnAdNetworks.scale.y = 2;
 		
 		btnNewStunt.text = "NEW STUNT";
-		btnPastStunts.text = "PAST STUNTS";
+		btnPastStunts.text = "INFO";
 		btnAdNetworks.text = "SELL DATA";
 		
 		var defoff = [

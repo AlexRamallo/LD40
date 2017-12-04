@@ -36,9 +36,6 @@ class PlayState extends FlxState
 	{
 		super.update(elapsed);
 		
-		if (FlxG.keys.justPressed.ESCAPE)
-			Sys.exit(0);
-		
 		if (FlxG.keys.justPressed.SPACE)
 			view.atPC?view.showRoom():view.showPC();
 			
